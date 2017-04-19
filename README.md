@@ -26,7 +26,6 @@ Version: **profitbricks-sdk-java v4.0.0**
     * [LANs](#lans)
     * [Images](#images)
     * [Load Balancers](#load-balancers)
-    * [Locations](#locations)
     * [IP Blocks](#ip-blocks)
     * [Snapshots](#snapshots)
     * [Requests](#requests)

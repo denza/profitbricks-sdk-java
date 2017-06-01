@@ -19,17 +19,84 @@ Version: **profitbricks-sdk-java v4.0.0**
     * [How to: Create Network Interfaces](#how-to-create-network-interfaces)
 * [Reference](#reference)
     * [Virtual Data Centers](#virtual-data-centers)
+        * [List Data Centers](#list-data-centers)
+        * [Retrieve a Data Center](#retrieve-a-data-center)
+        * [Create a Data Center](#create-a-data-center)
+        * [Update a Data Center](#update-a-data-center)
+        * [Delete a Data Center](#delete-a-data-center)
     * [Servers](#servers)
+        * [List Servers](#list-servers)
+        * [Retrieve a Server](#retrieve-a-server)
+        * [Create a Server](#create-a-server)
+        * [Update a Server](#update-a-server)
+        * [Delete a Server](#delete-a-server)
+        * [Reboot a Server](#reboot-a-server)
+        * [Start a Server](#start-a-server)
+        * [Stop a Server](#stop-a-server)
+        * [Attach a CD-ROM](#attach-a-cd-rom)
+        * [Detach a CD-ROM](#detach-a-cd-rom)
+        * [List attached CD-ROMs](#list-attached-cd-roms)
+        * [Get attached CD-ROM](#get-attached-cd-rom) 
     * [Volumes](#volumes)
+        * [List Volumes](#list-volumes)
+        * [Get a Volume](#get-a-volume)
+        * [Create a Volume](#create-a-volume)
+        * [Update a Volume](#update-a-volume)
+        * [Attach a Volume](#attach-a-volume)
+        * [Detach a Volume](#detach-a-volume)
+        * [Delete a Volume](#delete-a-volume)
     * [NICs](#nics)
+        * [List NICs](#list-nics)
+        * [Get a NIC](#get-a-nic)
+        * [Create a NIC](#create-a-nic)
+        * [Update a NIC](#update-a-nic)
+        * [List Load Balanced NICs](#list-load-balanced-nics)
+        * [Get a Load Balanced NIC](#get-a-load-balanced-nic)
+        * [Associate NIC to a Load Balancer](#associate-nic-to-a-load-balancer)
+        * [Remove a NIC Association](#remove-a-nic-association)
+        * [Delete a NIC](#delete-a-nic)
     * [Firewall Rules](#firewall-rules)
+        * [List Firewall Rules](#list-firewall-rules)
+        * [Get a Firewall Rule](#get-a-firewall-rule)
+        * [Create a Firewall Rule](#create-a-firewall-rule)
+        * [Update a Firewall Rule](#update-a-firewall-rule)
+        * [Delete a Firewall Rule](#delete-a-firewall-rule)
     * [LANs](#lans)
+        * [List LANs](#list-lans)
+        * [Create a LAN](#create-a-lan)
+        * [Get a LAN](#get-a-lan)
+        * [Update a LAN](#update-a-lan)
+        * [Delete a LAN](#delete-a-lan)
     * [Images](#images)
+        * [List Images](#list-images)
+        * [Get an Image](#get-an-image)
+        * [Delete an Image](#delete-an-image)
+        * [Update an Image](#update-an-image)
     * [Load Balancers](#load-balancers)
+        * [List Load Balancers](#list-load-balancers)
+        * [Get a Load Balancer](#get-a-load-balancer)
+        * [Create a Load Balancer](#create-a-load-balancer)
+        * [Update a Load Balancer](#update-a-load-balancer)
+        * [Delete a Load Balancer](#Delete a Load Balancer)
     * [IP Blocks](#ip-blocks)
+        * [List IP Blocks](#list-ip-blocks)
+        * [Get an IP Block](#get-an-ip-block)
+        * [Create an IP Block](#create-an-ip-block)
+        * [Delete an IP Block](#delete-an-ip-block)
     * [Snapshots](#snapshots)
+        * [List Snapshots](#list-snapshots)
+        * [Get a Snapshot](#get-a-snapshot)
+        * [Update a Snapshot](#update-a-snapshot)
+        * [Create a Volume Snapshot](#create-a-volume-snapshot)
+        * [Restore a Volume Snapshot](#restore-a-volume-snapshot)
+        * [Delete a Snapshot](#delete-a-snapshot)
     * [Requests](#requests)
+        * [Get a Request status](#get-a-request-status)
+        * [Get a Request](#get-a-request)
+        * [List Requests](#list-requests)
     * [Locations](#locations)
+        * [List Locations](#list-locations)
+        * [Get a Location](#get-a-location)
 * [Examples](#examples)
     * [POM](#pom)
     * [Wait for Resources](#wait-for-resources)
@@ -397,9 +464,9 @@ Creates a server within an existing data center. You can configure additional pr
 | bootCdrom | no | string | Reference to a CD-ROM used for booting. If not 'null' then bootVolume has to be 'null'. | 
 | cpuFamily | no | string | Sets the CPU type. "AMD_OPTERON" or "INTEL_XEON". Defaults to "AMD_OPTERON". | 
 
-**License Types** 
+**Licence Types** 
 
-| License Type | Description |
+| Licence Type | Description |
 |---|---|
 | WINDOWS | You must specify this if you are using your own, custom Windows image due to Microsoft's licensing terms. |
 | LINUX | |
@@ -1394,7 +1461,7 @@ Performs updates to attributes of a snapshot.
 | discVirtioHotUnplug | no | bool | This volume is capable of Virt-IO drive hot unplug (no reboot required) | 
 | discScsiHotPlug | no | bool | This volume is capable of SCSI drive hot plug (no reboot required) | 
 | discScsiHotUnplug | no | bool | This volume is capable of SCSI drive hot unplug (no reboot required) | 
-| licenceType | no | string | The snapshot's license type: LINUX, WINDOWS, or UNKNOWN. | 
+| licenceType | no | string | The snapshot's licence type: LINUX, WINDOWS, or UNKNOWN. | 
 
 After retrieving a snapshot, you can change its properties and call the `updateSnapshot` method:
 

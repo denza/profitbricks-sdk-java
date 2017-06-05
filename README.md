@@ -9,14 +9,7 @@ Version: **profitbricks-sdk-java v4.0.0**
 * [Installation](#installation)
 * [Usage](#usage)
     * [Authentication](#authentication)
-    * [How to: Create a Data Center](#how-to-create-a-data-center)
-    * [How to: Create a Data Center with Multiple Resources](#how-to-create-data-center-with-multiple-resources)
-    * [How to: Delete a Data Center](#how-to-delete-a-data-center)
-    * [How to: Create a Server](#how-to-create-a-server)
-    * [How to: Update Cores and Memory](#how-to-update-cores-and-memory)
-    * [How to: Attach and Detach a Volume](#how-to-attach-and-detach-a-volume)
-    * [How to: List Data Centers, Servers, and Volumes](#how-to-list-data-centers-servers-and-volumes)
-    * [How to: Create Network Interfaces](#how-to-create-network-interfaces)
+    * [List Resources](#list-resources)
 * [Reference](#reference)
     * [Virtual Data Centers](#virtual-data-centers)
         * [List Data Centers](#list-data-centers)
@@ -102,6 +95,7 @@ Version: **profitbricks-sdk-java v4.0.0**
     * [Wait for Resources](#wait-for-resources)
     * [Component Build](#component-build)
     * [Composite Build](#composite-build)
+    * [Work with Volumes](#work-with-volumes)
 * [Support](#support)
 * [Testing](#testing)
 * [Contributing](#contributing)
@@ -166,140 +160,7 @@ First you need to instantiate the ProfitBricks API and pass the ProfitBricks acc
 
 If you have set the `PROFITBRICKS_USERNAME` and `PROFITBRICKS_PASSWORD` environment variables, then you can exclude the `setCredentials` function. The credentials will be inherited from the environment variables. The Cloud API URL can also be overridden with the `PROFITBRICKS_API_URL` environment variable.
 
-List all data centers:
-
-    DataCenters datacenters = profitbricksApi.getDataCenter().getAllDataCenters();
-
-This will list all data centers you have under your account.
-
-### How to: Create a Data Center
-
-ProfitBricks introduces the concept of virtual data centers. These are logically separated from one another and allow you to have a self-contained environment for all servers, volumes, networking, snapshots, etc. This gives you the same experience as if you were running your own physical data center.
-
-You are required to create a data center before you can create any further objects. Think of the data center as a bucket in which all objects (such as servers and volumes) are stored.
-
-This code example shows how to programmatically create a data center:
-
-    DataCenter datacenter = new DataCenter();
-
-    datacenter.getProperties().setName("SDK Test Data Center");
-    datacenter.getProperties().setLocation("us/las");
-    datacenter.getProperties().setDescription("SDK test data center description");
-
-    DataCenter newDatacenter = profitbricksApi.getDataCenter().createDataCenter(datacenter);
-
-### How to: Delete a Data Center
-
-Use caution when deleting a data center. Deleting a data center will **destroy** all objects contained within that data center -- including all servers, volumes, snapshots, etc. **When the objects are deleted** they **cannot be recovered**.
-
-This example deletes the data center created above:
-
-    profitbricksApi.getDataCenter().deleteDataCenter(dataCenterId);
-
-### How To: Create Data Center with Multiple Resources
-
-The ProfitBricks SDK for Java allows a single request to create multiple nested resources.
-
-This example will create a composite data center with an associated server, NIC, and volume:
-
-    DataCenter datacenter = new DataCenter();
-    datacenter.getProperties().setName("SDK Test Data Center");
-    datacenter.getProperties().setLocation("us/las");
-    datacenter.getProperties().setDescription("Java SDK test description");
-
-    // Add a server
-    Server server = new Server();
-
-    server.getProperties().setName("SDK Test Server");
-    server.getProperties().setCores(2);
-    server.getProperties().setRam(4096);
-
-    // Add a volume to the server
-    Volume volume = new Volume();
-    volume.getProperties().setName("SDK Test Volume");
-    volume.getProperties().setSize(10);
-    volume.getProperties().setImage("826c507a-fe3f-11e6-afc5-525400f64d8d");
-    volume.getProperties().setType("HDD");
-
-    List<String> sshkeys = new ArrayList<String>();
-    sshkeys.add("ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCoLVLHON4BSK3D8L4H79aFo...");
-    volume.getProperties().setSshKeys(sshkeys);
-
-    Volumes volumes = new Volumes();
-    List<Volume> volumeList = new ArrayList<Volume>();
-    volumeList.add(volume);
-    volumes.setItems(volumeList);
-    server.getEntities().setVolumes(volumes);
-
-    // Add a NIC to the server
-    Nic nic = new Nic();
-    nic.getProperties().setName("SDK Test NIC");
-    nic.getProperties().setLan("1");
-    nic.getProperties().setNat(Boolean.FALSE);
-
-    Nics nics = new Nics();
-    List<Nic> nicList = new ArrayList<Nic>();
-    nicList.add(nic);
-    nics.setItems(nicList);
-    server.getEntities().setNics(nics);
-
-    Servers servers = new Servers();
-    List<Server> serversList = new ArrayList<Server>();
-    serversList.add(server);
-    servers.setItems(serversList);
-    datacenter.getEntities().setServers(servers);
-
-    DataCenter newDatacenter = profitbricksApi.getDataCenter().createDataCenter(datacenter);
-
-### How to: Create a Server
-
-This example creates a server and assigns it an OS, cores, and memory. We urge you to refer to the [documentation](https://devops.profitbricks.com/api/rest/) to see the complete list attributes available.
-
-    Server server = new Server();
-    server.getProperties().setName("SDK Test Server");
-    server.getProperties().setRam(4096);
-    server.getProperties().setCores(2);
-    server.getProperties().setCpuFamily("AMD_OPTERON");
-
-    Server newServer = profitbricksApi.getServer().createServer(dataCenterId, server);
-
-One of the unique features of the ProfitBricks platform is that it allows you to define your own settings for cores, memory, and disk size without being tied to a particular instance size.  
-
-### How to: Update Cores and Memory
-
-ProfitBricks allows users to dynamically update cores and memory independently of each other. This means that you do not have to upgrade to the larger size in order to increase memory. You can simply increase the instance's memory, which keeps your costs in line with your resource needs.
-
-This example updates cores and memory:
-
-    Server.Properties object = new Server().new Properties();
-    object.setName("SDK New Server Name");
-    object.setRam(1024);
-    object.setCores(4);
-
-    Server updatedServer = profitbricksApi.getServer().updateServer(dataCenterId, serverId, object);
-
-### How to: Attach and Detach a Volume
-
-ProfitBricks allows for the creation of multiple storage volumes. You can attach and detach these on the fly. This is helpful in scenarios such as attaching a failed OS disk to another server for recovery, or moving a volume to another server to bring online.
-
-This example attaches a volume, then detaches it from a server:
-
-    // First we need to create a volume.
-    Volume volume = new Volume();
-    volume.getProperties().setName("SDK Test Volume");
-    volume.getProperties().setSize(1024);
-    volume.getProperties().setLicenceType("LINUX");
-    volume.getProperties().setType("HDD");
-
-    Volume newVolume = profitbricksApi.getVolume().createVolume(dataCenterId, volume);
-
-    // Then we are going to attach the new volume to a server.
-    Volume attachedVolume = profitbricksApi.getVolume().attachVolume(dataCenterId, serverId, volumeId);
-
-    // Here we are going to detach it from the server.
-    profitbricksApi.getVolume().detachVolume(dataCenterId, serverId, volumeId);
-
-### How to: List Data Centers, Servers, and Volumes
+### List Resources
 
 You can pull various resource lists from your data centers using the SDK for Java. The three most common resources are data centers, servers, and volumes.
 
@@ -311,22 +172,6 @@ This example retrieves these three list types:
 
     Volumes volumes = profitbricksApi.getVolume().getAllVolumes(dataCenterId);
 
-### How to: Create Network Interfaces
-
-The ProfitBricks platform supports adding multiple NICs to a server. These NICs can be used to create different, segmented networks on the platform.
-
-This example adds a second NIC to an existing server:
-
-    Nic nic = new Nic();
-
-    nic.getProperties().setName("SDK Test NIC");
-    nic.getProperties().setLan("1");
-
-    nic.getEntities().setFirewallrules(null);
-
-    Nic newNic = profitbricksApi.getNic().createNic(dataCenterId, serverId, nic);
-
-Note: This function will result in the server being restarted.
 
 ## Reference  
 
@@ -345,9 +190,9 @@ getAllDataCenters()
 
 **Request Arguments**
 
-| Name | Required | Type | Description | 
+| Name | Required | Type | Description |
 |---|:-:|:-:|---|
-| id | **yes** | string | The ID of the data center. | 
+| id | **yes** | string | The ID of the data center. |
 
 ```
 getDataCenter(String id)
@@ -381,6 +226,16 @@ createDataCenter(DataCenter datacenter)
 
 * The value for `name` cannot contain the characters: (@, /, , |, ‘’, ‘).
 * You cannot change a data center's `location` once it has been provisioned.
+
+This code example shows how to programmatically create a data center:
+
+    DataCenter datacenter = new DataCenter();
+
+    datacenter.getProperties().setName("SDK Test Data Center");
+    datacenter.getProperties().setLocation("us/las");
+    datacenter.getProperties().setDescription("SDK test data center description");
+
+    DataCenter newDatacenter = profitbricksApi.getDataCenter().createDataCenter(datacenter);
 
 ---
 
@@ -488,6 +343,16 @@ Creates a server within an existing data center. You can configure additional pr
 createServer(String dataCenterId, Server server)
 ```
 
+This example creates a server and assigns it an OS, cores, and memory. We urge you to refer to the [Cloud API documentation](https://devops.profitbricks.com/api/cloud/) to see the complete list of attributes available.
+
+    Server server = new Server();
+    server.getProperties().setName("SDK Test Server");
+    server.getProperties().setRam(4096);
+    server.getProperties().setCores(2);
+    server.getProperties().setCpuFamily("AMD_OPTERON");
+
+    Server newServer = profitbricksApi.getServer().createServer(dataCenterId, server);
+
 ---
 
 #### Update a Server
@@ -513,6 +378,15 @@ After retrieving a server, either by getting it by ID, or as a create response o
 ```
 updateServer(String dataCenterId, String serverId, Server.Properties server)
 ```
+
+This example updates cores and memory:
+
+    Server.Properties object = new Server().new Properties();
+    object.setName("SDK New Server Name");
+    object.setRam(1024);
+    object.setCores(4);
+
+    Server updatedServer = profitbricksApi.getServer().updateServer(dataCenterId, serverId, object);
 
 ---
 
@@ -878,6 +752,21 @@ Adds a NIC to the target server.
 ```
 createNic(String dataCenterId, String serverId, Nic nic)
 ```
+
+The ProfitBricks platform supports adding multiple NICs to a server. These NICs can be used to create different, segmented networks on the platform.
+
+This example adds a second NIC to an existing server:
+
+    Nic nic = new Nic();
+
+    nic.getProperties().setName("SDK Test NIC");
+    nic.getProperties().setLan("1");
+
+    nic.getEntities().setFirewallrules(null);
+
+    Nic newNic = profitbricksApi.getNic().createNic(dataCenterId, serverId, nic);
+
+**Note**: This function will result in the server being restarted.
 
 ---
 
@@ -1867,6 +1756,27 @@ ProfitBricks also allows servers to be built using a composite request. This exa
         }
     }
 
+### Work With Volumes
+
+ProfitBricks allows for the creation of multiple storage volumes. You can attach and detach these on the fly. This is helpful in scenarios such as attaching a failed OS disk to another server for recovery, or moving a volume to another server to bring online.
+
+This example attaches a volume, then detaches it from a server:
+
+    // First we need to create a volume.
+    Volume volume = new Volume();
+    volume.getProperties().setName("SDK Test Volume");
+    volume.getProperties().setSize(1024);
+    volume.getProperties().setLicenceType("LINUX");
+    volume.getProperties().setType("HDD");
+
+    Volume newVolume = profitbricksApi.getVolume().createVolume(dataCenterId, volume);
+
+    // Then we are going to attach the new volume to a server.
+    Volume attachedVolume = profitbricksApi.getVolume().attachVolume(dataCenterId, serverId, volumeId);
+
+    // Here we are going to detach it from the server.
+    profitbricksApi.getVolume().detachVolume(dataCenterId, serverId, volumeId);
+
 ## Support
 
 You can engage with us on the [ProfitBricks DevOps Central](https://devops.profitbricks.com/) site where we will be happy to answer any questions you might have.
@@ -1882,7 +1792,7 @@ You can engage with us on the [ProfitBricks DevOps Central](https://devops.profi
 
 Set these environment variables to run the unit tests:
 
-    export PROFITBRICKS_USERName=username
+    export PROFITBRICKS_USERNAME=username
     export PROFITBRICKS_PASSWORD=password
 
 Maven can then be used to run the tests:

@@ -345,9 +345,9 @@ getAllDataCenters()
 
 **Request Arguments**
 
-| Name | Type | Description | Required |
-|---|---|---|---|
-| id | string | The ID of the data center. | Yes |
+| Name | Required | Type | Description | 
+|---|;-;|;-;|---|
+| id | **yes** | string | The ID of the data center. | 
 
 ```
 getDataCenter(String id)
@@ -358,8 +358,8 @@ getDataCenter(String id)
 
 **Request Arguments**
 
-| Name | Required |Type | Description |
-|---|---|---|---|
+| Name | Required | Type | Description |
+|---|;-;|;-;|---|
 | name | **yes** | string | The name of the data center. |
 | location | **yes** |string | The physical location where the data center will be created. This will be where all of your servers live. |
 | description | no | string | A description for the data center, e.g. staging, production. |
@@ -395,7 +395,7 @@ updateDataCenter(String id, DataCenter.Properties object)
 **Request Arguments**
 
 | Name | Required | Type | Description |
-| --- | --- | --- | --- |
+|---|;-;|;-;|---|
 | Properties.name | no | string | The new name of the data center. |
 | Properties.description | no | string | The new description of the data center. |
 ---
@@ -421,7 +421,7 @@ You can retrieve a list of all servers within a data center.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** |string | The ID of the data center. |
 
 ```
@@ -437,7 +437,7 @@ Returns information about a server such as its configuration, provisioning statu
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** |string | The ID of the server. |
 
@@ -454,7 +454,7 @@ Creates a server within an existing data center. You can configure additional pr
 **Request Arguments**
 
 | Name | Required |Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | name | **yes** | string | The hostname of the server. |
 | cores | **yes** | int | The total number of cores for the server. |
@@ -497,7 +497,7 @@ Performs updates to the attributes of a server.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** |string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | server.name | no | string | The name of the server. |
@@ -523,7 +523,7 @@ This will remove a server from a data center. NOTE: This will not automatically 
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 
@@ -542,7 +542,7 @@ Forces a hard reboot of the server. Do not use this method if you want to gracef
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 
@@ -561,7 +561,7 @@ Starts a server. If the server's public IP address was deallocated, a new IP add
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 
@@ -580,7 +580,7 @@ Stops a server. The machine will be forcefully powered off, billing will stop, a
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 
@@ -599,7 +599,7 @@ Attaches a CD-ROM to the server.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | imageId | **yes** | string | The ID of a ProfitBricks image of type CDROM. |
@@ -619,7 +619,7 @@ Detaches a CD-ROM from the server. Depending on the volume's "hot_unplug" settin
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | cdromID | **yes** | string | The ID of the attached CDROM. |
@@ -639,7 +639,7 @@ Lists CD-ROMs that are attached to the server
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 
@@ -657,7 +657,7 @@ Retrieves a CD-ROM that is attached to the server
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | cdromID | **yes** | string | The ID of the attached CD-ROM. |
@@ -678,7 +678,7 @@ Retrieves a list of volumes within the data center. If you want to retrieve a li
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 
 ```
@@ -695,7 +695,7 @@ Retrieves the attributes of a given volume.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | volumeId | **yes** | string | The ID of the volume. |
 
@@ -712,7 +712,7 @@ Creates a volume within the data center.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | size | **yes** | int | The size of the volume in GB. |
 | type | **yes** | string | The volume type, HDD or SSD. |
@@ -741,7 +741,7 @@ Updates a specified volume.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | volumeId | **yes** | string | The ID of the volume. |
 | volume.name | no | string | The name of the volume. |
@@ -772,7 +772,7 @@ Attaches a pre-existing storage volume to the server.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | volumeId | **yes** | string | The ID of a storage volume. |
@@ -794,7 +794,7 @@ This will NOT delete the volume from your data center. You will need to make a s
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | volumeId | **yes** | string | The ID of the attached volume. |
@@ -829,7 +829,7 @@ Retrieves a list of NICs within the data center.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 
@@ -846,7 +846,7 @@ Retrieves the attributes of a given NIC.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | nicId | **yes** | string | The ID of the NIC. |
@@ -864,7 +864,7 @@ Adds a NIC to the target server.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | lan | **yes** | int | The LAN ID the NIC will sit on. If the LAN ID does not exist it will be created. |  
@@ -893,7 +893,7 @@ Various attributes on the NIC can be updated (either in full or partially) altho
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | nicId | **yes** | string | The ID of the NIC. |
@@ -916,7 +916,7 @@ updateNic(String dataCenterId, String serverId, String nicId, Nic.Properties nic
 Retrieves a list of NICs associated with the load balancer.
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | loadBalancerId | **yes** | string | The ID of the load balancer. |
 
@@ -933,7 +933,7 @@ getAllBalancedNics(String dataCenterId, String loadBalancerId, String serverId)
 Retrieves the attributes of a given load balanced NIC.
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | loadBalancerId | **yes** | string | The ID of the load balancer. |
 | serverId | **yes** | string | The ID of the server. |
@@ -950,7 +950,7 @@ getBalancedNic(String dataCenterId, String loadBalancerId, String serverId, Stri
 Associates a NIC to a Load Balancer, enabling the NIC to participate in load-balancing.
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | loadBalancerId | **yes** | string | The ID of the load balancer. |
 | nicId | **yes** | string | The ID of the load balancer. |
@@ -968,7 +968,7 @@ assignNicToLoadBalancer(String dataCenterId, String loadBalancerId, String nicId
 Removes the association of a NIC with a load balancer.
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | loadBalancerId | **yes** | string | The ID of the load balancer. |
 | nicId | **yes** | string | The ID of the load balancer. |
@@ -989,7 +989,7 @@ Deletes the specified NIC.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | nicId | **yes** | string | The ID of the NIC. |
@@ -1011,7 +1011,7 @@ Retrieves a list of firewall rules associated with a particular NIC.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | nicId | **yes** | string | The ID of the NIC. |
@@ -1029,7 +1029,7 @@ Retrieves the attributes of a given firewall rule.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | nicId | **yes** | string | The ID of the NIC. |
@@ -1048,7 +1048,7 @@ Adds a firewall rule to the NIC.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | nicId | **yes** | string | The ID of the NIC. |
@@ -1075,7 +1075,7 @@ Performs updates to attributes of a firewall rule.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | nicId | **yes** | string | The ID of the NIC. |
@@ -1104,7 +1104,7 @@ Removes the specific firewall rule.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
 | nicId | **yes** | string | The ID of the NIC. |
@@ -1127,7 +1127,7 @@ Retrieves a list of LANs within the data center.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 
 ```
@@ -1143,7 +1143,7 @@ Creates a LAN within a data center.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | name | no | string | The name of your LAN. |
 | isPublic | no | bool | Boolean indicating if the LAN faces the public Internet or not. |
@@ -1162,7 +1162,7 @@ Retrieves the attributes of a given LAN.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | lanId | **yes** | string | The ID of the LAN. |
 
@@ -1179,7 +1179,7 @@ Performs updates to the attributes of a LAN.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | lanId | **yes** | string | The ID of the LAN. |
 | isPublic | no | bool | Boolean indicating if the LAN faces the public Internet or not. |
@@ -1199,7 +1199,7 @@ Deletes the specified LAN.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | lanId | **yes** | string | The ID of the LAN. |
 
@@ -1228,7 +1228,7 @@ Retrieves the attributes of a specific image.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | imageId | **yes** | string | The ID of the image. |
 
 ```
@@ -1242,7 +1242,7 @@ Deletes a specific image.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | imageId | **yes** | string | The ID of the image. |
 
 ```
@@ -1256,7 +1256,7 @@ Updates a specific image.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | imageId | **yes** | string | The ID of the image. |
 
 ```
@@ -1272,7 +1272,7 @@ updateImage(String imageId, Image.Properties object)
 Retrieves a list of load balancers within the data center.
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | datacenter_id | **yes** | string | The ID of the data center. |
 
 ```
@@ -1286,7 +1286,7 @@ getAllLoadBalancers(String dataCenterId)
 Retrieves the attributes of a given load balancer.
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | loadBalancerId | **yes** | string | The ID of the load balancer. |
 
@@ -1301,7 +1301,7 @@ getLoadBalancer(String dataCenterId, String loadBalancerId)
 Creates a load balancer within the data center. Load balancers can be used for traffic on either public or private IP addresses.
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | name | **yes** | string | The name of the load balancer. |
 | ip | no | string | IPv4 address of the load balancer. All attached NICs will inherit this IP address. |
@@ -1319,7 +1319,7 @@ createLoadBalancer(String dataCenterId, LoadBalancer loadBalancer)
 Performs updates to attributes of a load balancer.
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | loadBalancerId | **yes** | string | The ID of the load balancer. |
 | loadBalancer.name | no | string | The name of the load balancer. |
@@ -1339,7 +1339,7 @@ updateLoadBalancer(String dataCenterId, String loadBalancerId, LoadBalancer.Prop
 Deletes the specified load balancer.
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | loadBalancerId | **yes** | string | The ID of the load balancer. |
 
@@ -1370,7 +1370,7 @@ Retrieves the attributes of a specific IP Block.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | ipBlockId | **yes** | string | The ID of the IP block. |
 
 ```
@@ -1386,7 +1386,7 @@ Creates an IP block.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | ipBlock.location | **yes** | string | This must be one of the following locations: us/las, de/fra, de/fkb. |
 | ipBlock.size | **yes** | int | The size of the IP block you want. |
 | ipBlock.name | no | string | A descriptive name for the IP block |
@@ -1404,7 +1404,7 @@ Deletes the specified IP Block.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | ipBlockId | **yes** | string | The ID of the IP block. |
 
 After retrieving an IP block, either by getting it by ID, you can call the `deleteIPBlock` method directly on the object:
@@ -1433,7 +1433,7 @@ Retrieves the attributes of a specific snapshot.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | snapshotId | **yes** | string | The ID of the snapshot. |
 
 ```
@@ -1449,7 +1449,7 @@ Performs updates to attributes of a snapshot.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the snapshot. |
 | snapshotId | **yes** | string | The ID of the snapshot. |
 | name | no | string | The name of the snapshot. |
@@ -1481,7 +1481,7 @@ Creates a snapshot of a volume within the data center. You can use a snapshot to
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the datacenter. |
 | volumeId | **yes** | string | The ID of the volume. |
 | name |  no | string | The name of the snapshot. |
@@ -1503,7 +1503,7 @@ Restores a snapshot onto a volume. A snapshot is created as an image which can b
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | dataCenterId | **yes** | string | The ID of the datacenter. |
 | volumeId | **yes** | string | The ID of the volume. |
 | snapshotId | **yes** | string | The ID of the snapshot. |
@@ -1523,7 +1523,7 @@ Deletes the specified snapshot.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | snapshotId | **yes** | string | The ID of the snapshot. |
 
 After retrieving a snapshot, you can call the `deleteSnapshot` method directly on the object:
@@ -1543,7 +1543,7 @@ Retrieves the status of a specific request.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | url | **yes** | string | The ID of the request. |
 
 ```
@@ -1558,7 +1558,7 @@ Retrieves the attributes of a specific request.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-|---|---|---|---|
+|---|;-;|;-;|---|
 | requestId | **yes** | string | The ID of the request. |
 
 ```
@@ -1594,7 +1594,7 @@ Retrieves the attributes of a given location.
 **Request Arguments**
 
 | Name | Required | Type | Description |
-| --- | --- | --- | --- |
+|---|;-;|;-;|---|
 | id | **yes** | string | The unique identifier consisting of country/city. |
 
 ```

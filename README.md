@@ -77,7 +77,7 @@ Version: **profitbricks-sdk-java v4.0.0**
         * [Get a Load Balancer](#get-a-load-balancer)
         * [Create a Load Balancer](#create-a-load-balancer)
         * [Update a Load Balancer](#update-a-load-balancer)
-        * [Delete a Load Balancer](#Delete a Load Balancer)
+        * [Delete a Load Balancer](#delete-a-load-balancer)
     * [IP Blocks](#ip-blocks)
         * [List IP Blocks](#list-ip-blocks)
         * [Get an IP Block](#get-an-ip-block)

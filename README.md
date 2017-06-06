@@ -259,7 +259,7 @@ updateDataCenter(String id, DataCenter.Properties object)
 
 This will remove all objects within the data center and remove the data center object itself.
 
-**NOTE**: This is a highly destructive operation which should be used with extreme caution.
+**NOTE**: This is a highly destructive operation which should be used with extreme caution!
 
 ```
 deleteDataCenter(String id)
@@ -316,7 +316,7 @@ Creates a server within an existing data center. You can configure additional pr
 | ram | **yes** |int | The amount of memory for the server in MB, e.g. 2048. Size must be specified in multiples of 256 MB with a minimum of 256 MB; however, if you set ramHotPlug to TRUE then you must use a minimum of 1024 MB. |
 | availabilityZone | no | string | The availability zone in which the server should exist. |
 | licenceType | no | string | Sets the OS type of the server. If undefined the OS type will be inherited from the boot image or boot volume. |
-| bootVolume | no | string | Reference to a Volume used for booting. If not ‘null’ then bootCdrom has to be ‘null’. |
+| bootVolume | no | string | Reference to a Volume used for booting. If not 'null' then bootCdrom has to be 'null'. |
 | bootCdrom | no | string | Reference to a CD-ROM used for booting. If not 'null' then bootVolume has to be 'null'. |
 | cpuFamily | no | string | Sets the CPU type. "AMD_OPTERON" or "INTEL_XEON". Defaults to "AMD_OPTERON". |
 
@@ -343,7 +343,7 @@ Creates a server within an existing data center. You can configure additional pr
 createServer(String dataCenterId, Server server)
 ```
 
-This example creates a server and assigns it an OS, cores, and memory. We urge you to refer to the [Cloud API documentation](https://devops.profitbricks.com/api/cloud/) to see the complete list of attributes available.
+This example creates a server and assigns it a specific CPU type, cores, and memory. We urge you to refer to the [Cloud API documentation](https://devops.profitbricks.com/api/cloud/) to see the complete list of attributes available.
 
     Server server = new Server();
     server.getProperties().setName("SDK Test Server");

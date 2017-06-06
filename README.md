@@ -100,8 +100,6 @@ Version: **profitbricks-sdk-java v4.0.0**
 * [Testing](#testing)
 * [Contributing](#contributing)
 
---------------
-
 ## Description
 
 This Java library is a wrapper for the ProfitBricks Cloud API. All API operations are performed over SSL and are authenticated using your ProfitBricks portal credentials. The API can be accessed within an instance running in ProfitBricks or directly over the Internet from any application that can send an HTTPS request and receive an HTTPS response.
@@ -109,6 +107,8 @@ This Java library is a wrapper for the ProfitBricks Cloud API. All API operation
 This guide will show you how to programmatically perform common management tasks using the ProfitBricks SDK for Java.
 
 ## Getting Started
+
+These requirements must be met in order to successfully use this Java SDK:
 
 * ProfitBricks account
 * Java
@@ -120,7 +120,7 @@ Apache Maven must also be installed. Please review the official [Apache Maven in
 
 ## Installation
 
-The official ProfitBricks Java library is available from the ProfitBricks GitHub account found [here](https://github.com/profitbricks/profitbricks-sdk-Java). You can download the latest stable version by cloning the repository and then adding the project to your solution.
+The official ProfitBricks Java library is available from the [ProfitBricks GitHub account](https://github.com/profitbricks/profitbricks-sdk-java). You can download the latest stable version by cloning the repository and then adding the project to your solution.
 
 After the SDK is downloaded:
 
@@ -177,7 +177,7 @@ This example retrieves these three list types:
 
 ### Virtual Data Centers
 
-Virtual Data Centers are the foundation of the ProfitBricks platform. Virtual Data Centers act as logical containers for all other objects you will be creating, e.g., servers. You can provision as many data centers as you want. Data centers have their own private network and are logically segmented from each other to create isolation.
+Virtual Data Centers (VDCs) are the foundation of the ProfitBricks platform. A VDC acts as logical container for all other objects you will be creating, e.g., servers, networks, and volumes. You can provision as many VDCs as you want. VDCs have their own private network and are logically segmented from each other to create isolation.
 
 #### List Data Centers
 
@@ -188,7 +188,7 @@ getAllDataCenters()
 
 #### Retrieve a Data Center
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -201,7 +201,7 @@ getDataCenter(String id)
 
 #### Create a Data Center
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -209,7 +209,7 @@ getDataCenter(String id)
 | location | **yes** |string | The physical location where the data center will be created. This will be where all of your servers live. |
 | description | no | string | A description for the data center, e.g. staging, production. |
 
-**Supported Locations**
+Supported Locations
 
 | ID | Country | City |
 |---|---|---|
@@ -247,12 +247,13 @@ After retrieving a data center, you can change its properties and call the `upda
 updateDataCenter(String id, DataCenter.Properties object)
 ```
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
 | Properties.name | no | string | The new name of the data center. |
 | Properties.description | no | string | The new description of the data center. |
+
 ---
 
 #### Delete a Data Center
@@ -273,7 +274,7 @@ deleteDataCenter(String id)
 
 You can retrieve a list of all servers within a data center.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -289,7 +290,7 @@ getAllServers(String dataCenterId)
 
 Returns information about a server such as its configuration, provisioning status, etc.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -306,7 +307,7 @@ getServer(String dataCenterId, String serverId)
 
 Creates a server within an existing data center. You can configure additional properties such as specifying a boot volume and connecting the server to an existing LAN.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required |Type | Description |
 |---|:-:|:-:|---|
@@ -320,7 +321,7 @@ Creates a server within an existing data center. You can configure additional pr
 | bootCdrom | no | string | Reference to a CD-ROM used for booting. If not 'null' then bootVolume has to be 'null'. |
 | cpuFamily | no | string | Sets the CPU type. "AMD_OPTERON" or "INTEL_XEON". Defaults to "AMD_OPTERON". |
 
-**Licence Types**
+Licence Types
 
 | Licence Type | Description |
 |---|---|
@@ -330,7 +331,7 @@ Creates a server within an existing data center. You can configure additional pr
 | OTHER | For any volume that doesn't fit in another licence category. |
 | UNKNOWN | If you are using an image uploaded to your account, your OS Type will inherit as UNKNOWN. |
 
-**Availability Zones**
+Availability Zones
 
 | Availability Zone | Description |
 |---|---|
@@ -359,7 +360,7 @@ This example creates a server and assigns it a specific CPU type, cores, and mem
 
 Performs updates to the attributes of a server.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -394,7 +395,7 @@ This example updates cores and memory:
 
 This will remove a server from a data center. NOTE: This will not automatically remove the storage volume(s) attached to a server. A separate API call is required to perform that action.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -413,7 +414,7 @@ deleteServer(String dataCenterId, String serverId)
 
 Forces a hard reboot of the server. Do not use this method if you want to gracefully reboot the machine. This is the equivalent of powering off the machine and turning it back on.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -432,7 +433,7 @@ rebootServer(String dataCenterId, String serverId)
 
 Starts a server. If the server's public IP address was deallocated, a new IP address will be assigned.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -451,7 +452,7 @@ startServer(String dataCenterId, String serverId)
 
 Stops a server. The machine will be forcefully powered off, billing will stop, and if a public IP address is allocated, it will be deallocated.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -470,7 +471,7 @@ stopServer(String dataCenterId, String serverId)
 
 Attaches a CD-ROM to the server.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -490,7 +491,7 @@ attachCDRom(String dataCenterId, String serverId, String imageId)
 
 Detaches a CD-ROM from the server. Depending on the volume's "hot_unplug" settings, this may result in the server being rebooted.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -510,7 +511,7 @@ detachCDRom(String dataCenterId, String serverId, String cdromId)
 
 Lists CD-ROMs that are attached to the server
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -519,7 +520,7 @@ Lists CD-ROMs that are attached to the server
 
 
 ```
-ligetAllAttachedCDRoms(String dataCenterId, String serverId)
+getAllAttachedCDRoms(String dataCenterId, String serverId)
 ```
 
 ---
@@ -528,19 +529,18 @@ ligetAllAttachedCDRoms(String dataCenterId, String serverId)
 
 Retrieves a CD-ROM that is attached to the server
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
 | dataCenterId | **yes** | string | The ID of the data center. |
 | serverId | **yes** | string | The ID of the server. |
-| cdromID | **yes** | string | The ID of the attached CD-ROM. |
+| cdromId | **yes** | string | The ID of the attached CD-ROM. |
 
 
 ```
-ligetAllAttachedCDRoms(String dataCenterId, String serverId)
+getAttachedCDRom(String dataCenterId, String serverId, String cdromId)
 ```
-
 
 ---
 
@@ -550,7 +550,7 @@ ligetAllAttachedCDRoms(String dataCenterId, String serverId)
 
 Retrieves a list of volumes within the data center. If you want to retrieve a list of volumes attached to a server you can pass the `serverId` parameter as below.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -567,7 +567,7 @@ getAllVolumes(String dataCenterId, String serverId)
 
 Retrieves the attributes of a given volume.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -584,7 +584,7 @@ getVolume(String dataCenterId, String volumeId)
 
 Creates a volume within the data center.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -592,7 +592,7 @@ Creates a volume within the data center.
 | size | **yes** | int | The size of the volume in GB. |
 | type | **yes** | string | The volume type, HDD or SSD. |
 | image | **yes*** | string | The image or snapshot ID. |
-| licenceType | **yes*** | string | The licence type of the volume. Options: LINUX, WINDOWS, UNKNOWN, OTHER |
+| licenceType | **yes*** | string | The licence type of the volume. Options: LINUX, WINDOWS, WINDOWS2016, UNKNOWN, OTHER |
 | imagePassword | **yes**** | string | One-time password is set on the Image for the appropriate account. This field may only be set in creation requests. When reading, it always returns null. Password has to contain 8-50 characters. Only these characters are allowed: [abcdefghjkmnpqrstuvxABCDEFGHJKLMNPQRSTUVX23456789] |
 | sshKeys | **yes**** | string | SSH keys to allow access to the volume via SSH |
 | name | no | string | The name of the volume. |  
@@ -613,7 +613,7 @@ createVolume(String dataCenterId, Volume volume)
 
 Updates a specified volume.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -644,7 +644,7 @@ updateVolume(String dataCenterId, String volumeId, Volume.Properties volume)
 
 Attaches a pre-existing storage volume to the server.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -666,7 +666,7 @@ Detaches a volume from the server. Depending on the volume's "hot_unplug" settin
 
 This will NOT delete the volume from your data center. You will need to make a separate request to delete a volume.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -694,14 +694,13 @@ deleteVolume(String dataCenterId, String volumeId)
 
 ---
 
-
 ### NICs
 
 #### List NICs
 
 Retrieves a list of NICs within the data center.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -718,7 +717,7 @@ getAllNics(String dataCenterId, String serverId)
 
 Retrieves the attributes of a given NIC.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -736,7 +735,7 @@ getNic(String dataCenterId, String serverId, String nicId)
 
 Adds a NIC to the target server.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -780,7 +779,7 @@ Various attributes on the NIC can be updated (either in full or partially) altho
 * The user can specify and assign private IP addresses manually.
 * Valid IP addresses for private networks are 10.0.0.0/8, 172.16.0.0/12 or 192.168.0.0/16.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -871,12 +870,11 @@ unassignNicFromLoadBalancer(String dataCenterId, String loadBalancerId, String n
 
 ---
 
-
 #### Delete a NIC
 
 Deletes the specified NIC.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -898,7 +896,7 @@ deleteNic(String dataCenterId, String serverId, String nicId)
 
 Retrieves a list of firewall rules associated with a particular NIC.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -916,7 +914,7 @@ getAllFirewallRules(String dataCenterId, String serverId, String nicId)
 
 Retrieves the attributes of a given firewall rule.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -935,7 +933,7 @@ getFirewallRule(String dataCenterId, String serverId, String nicId, String firew
 
 Adds a firewall rule to the NIC.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -962,7 +960,7 @@ createFirewallRule(String dataCenterId, String serverId, String nicId, FirewallR
 
 Performs updates to attributes of a firewall rule.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -991,7 +989,7 @@ updateFirewWallRule(String dataCenterId, String serverId, String nicId, String f
 
 Removes the specific firewall rule.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1014,7 +1012,7 @@ deleteFirewallRule(String dataCenterId, String serverId, String nicId, String fi
 
 Retrieves a list of LANs within the data center.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1030,7 +1028,7 @@ getAllLans(String dataCenterId)
 
 Creates a LAN within a data center.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1049,7 +1047,7 @@ createLan(String dataCenterId, Lan lan)
 
 Retrieves the attributes of a given LAN.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1066,7 +1064,7 @@ getLan(String dataCenterId, String lanId)
 
 Performs updates to the attributes of a LAN.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1086,7 +1084,7 @@ updateLan(String dataCenterId, String lanId, Boolean isPublic)
 
 Deletes the specified LAN.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1115,7 +1113,7 @@ getAllImages()
 
 Retrieves the attributes of a specific image.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1129,7 +1127,7 @@ getImage(String imageId)
 
 Deletes a specific image.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1143,7 +1141,7 @@ deleteImage(String imageId)
 
 Updates a specific image.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1257,7 +1255,7 @@ getAllIPBlocks()
 
 Retrieves the attributes of a specific IP Block.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1273,7 +1271,7 @@ getIPBlock(String ipBlockId)
 
 Creates an IP block.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1291,7 +1289,7 @@ createIPBlock(IPBlock ipBlock)
 
 Deletes the specified IP Block.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1320,7 +1318,7 @@ getAllSnapshots()
 
 Retrieves the attributes of a specific snapshot.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1336,7 +1334,7 @@ getSnapshot(String snapshotId)
 
 Performs updates to attributes of a snapshot.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1354,7 +1352,7 @@ Performs updates to attributes of a snapshot.
 | discVirtioHotUnplug | no | bool | This volume is capable of Virt-IO drive hot unplug (no reboot required) |
 | discScsiHotPlug | no | bool | This volume is capable of SCSI drive hot plug (no reboot required) |
 | discScsiHotUnplug | no | bool | This volume is capable of SCSI drive hot unplug (no reboot required) |
-| licenceType | no | string | The snapshot's licence type: LINUX, WINDOWS, or UNKNOWN. |
+| licenceType | no | string | The snapshot's licence type: LINUX, WINDOWS, WINDOWS2016, OTHER, or UNKNOWN. |
 
 After retrieving a snapshot, you can change its properties and call the `updateSnapshot` method:
 
@@ -1368,7 +1366,7 @@ updateSnapshot(String dataCenterId, String snapshotId, Snapshot.Properties snaps
 
 Creates a snapshot of a volume within the data center. You can use a snapshot to create a new storage volume or to restore a storage volume.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1385,12 +1383,11 @@ createSnapshot(dataCenterId, volumeId, description);
 
 ---
 
-
 #### Restore a Volume Snapshot
 
 Restores a snapshot onto a volume. A snapshot is created as an image which can be used to create new volumes or to restore an existing volume.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1410,7 +1407,7 @@ restoreSnapshot(String dataCenterId, String volumeId, String snapshotId)
 
 Deletes the specified snapshot.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1430,7 +1427,7 @@ deleteSnapshot(String snapshotId)
 
 Retrieves the status of a specific request.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1440,12 +1437,13 @@ Retrieves the status of a specific request.
 getRequestStatus(String url)
 ```
 
+---
 
 #### Get a Request
 
 Retrieves the attributes of a specific request.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1454,6 +1452,8 @@ Retrieves the attributes of a specific request.
 ```
 getRequest(String url)
 ```
+
+---
 
 #### List Requests
 
@@ -1481,7 +1481,7 @@ getAllLocations()
 
 Retrieves the attributes of a given location.
 
-**Request Arguments**
+Request Arguments
 
 | Name | Required | Type | Description |
 |---|:-:|:-:|---|
@@ -1677,7 +1677,7 @@ Using the above `waitTillProvisioned` method and individual components, a fully 
 
 ### Composite Build
 
-ProfitBricks also allows servers to be built using a composite request. This example  demonstrates a fully-operational public server built with a single composite request. Note that a second request is necessary to set the provisioned LAN to public.
+ProfitBricks also allows servers to be built using a composite request. This example demonstrates a fully-operational public server built with a single composite request. Note that a second request is necessary to set the provisioned LAN to public.
 
 `src/main/java/com/company/app/CompositeBuild.java`
 
@@ -1782,7 +1782,7 @@ This example attaches a volume, then detaches it from a server:
 
 You can engage with us on the [ProfitBricks DevOps Central](https://devops.profitbricks.com/) site where we will be happy to answer any questions you might have.
 
-**Additional Resources**
+Additional Resources
 
 * [ProfitBricks SDK for Java](https://devops.profitbricks.com/libraries/java/) guide.
 * [ProfitBricks Cloud API](https://devops.profitbricks.com/api/cloud/) documentation.

@@ -302,6 +302,7 @@ getDataCenter(String id)
 | ID | Country | City |
 |---|---|---|
 | us/las | United States | Las Vegas |
+|us/ewr  | United States | Newark |
 | de/fra | Germany | Frankfurt |
 | de/fkb | Germany | Karlsruhe |
 
@@ -311,7 +312,7 @@ createDataCenter(DataCenter datacenter)
 
 **NOTES**
 
-* The value for `name` cannot contain the characters: (@, /, , |, ‘’, ‘).
+* The value for `name` cannot contain the characters: (@, /, , |, ??, ?).
 * You cannot change a data center's `location` once it has been provisioned.
 
 ---
@@ -393,7 +394,7 @@ Creates a server within an existing data center. You can configure additional pr
 | ram | **yes** |int | The amount of memory for the server in MB, e.g. 2048. Size must be specified in multiples of 256 MB with a minimum of 256 MB; however, if you set ramHotPlug to TRUE then you must use a minimum of 1024 MB. | 
 | availabilityZone | no | string | The availability zone in which the server should exist. | 
 | licenceType | no | string | Sets the OS type of the server. If undefined the OS type will be inherited from the boot image or boot volume. | 
-| bootVolume | no | string | Reference to a Volume used for booting. If not ‘null’ then bootCdrom has to be ‘null’. | 
+| bootVolume | no | string | Reference to a Volume used for booting. If not ?null? then bootCdrom has to be ?null?. | 
 | bootCdrom | no | string | Reference to a CD-ROM used for booting. If not 'null' then bootVolume has to be 'null'. | 
 | cpuFamily | no | string | Sets the CPU type. "AMD_OPTERON" or "INTEL_XEON". Defaults to "AMD_OPTERON". | 
 
@@ -402,6 +403,7 @@ Creates a server within an existing data center. You can configure additional pr
 | Licence Type | Description |
 |---|---|
 | WINDOWS | You must specify this if you are using your own, custom Windows image due to Microsoft's licensing terms. |
+| WINDOWS2016 | Use this for the Microsoft Windows Server 2016 operating system. |
 | LINUX | |
 | UNKNOWN | If you are using an image uploaded to your account, your OS Type will inherit as UNKNOWN. |
 
@@ -435,7 +437,7 @@ Performs updates to the attributes of a server.
 | server.ram | no | int | The amount of memory in the server. | 
 | server.availabilityZone | no | string | The new availability zone for the server. | 
 | server.licenceType | no | string | The licence type for the server. | 
-| server.bootVolume | no | string | Reference to a Volume used for booting. If not ‘null’ then bootCdrom has to be ‘null’ | 
+| server.bootVolume | no | string | Reference to a Volume used for booting. If not ?null? then bootCdrom has to be ?null? | 
 | server.bootCdrom | no | string | Reference to a CD-ROM used for booting. If not 'null' then bootVolume has to be 'null'. | 
 
 After retrieving a server, either by getting it by ID, or as a create response object, you can change its properties and call the `update` method:

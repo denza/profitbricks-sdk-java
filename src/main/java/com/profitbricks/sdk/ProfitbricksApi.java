@@ -49,6 +49,7 @@ public class ProfitbricksApi {
         this.request = new Request();
         this.lan = new Lan();
         this.location = new Location();
+        this.contract = new Contract();
     }
 
     private Datacenter dataCenter;
@@ -63,6 +64,7 @@ public class ProfitbricksApi {
     private Request request;
     private Lan lan;
     private Location location;
+    private Contract contract;
 
     /**
      * @return the dataCenter
@@ -249,5 +251,13 @@ public class ProfitbricksApi {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    /**
+     * @return the contract
+     */
+    public Contract getContract() {
+        this.contract.setCredentials(credentials);
+        return contract;
     }
 }

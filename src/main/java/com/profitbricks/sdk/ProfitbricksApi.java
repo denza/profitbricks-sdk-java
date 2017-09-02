@@ -65,6 +65,7 @@ public class ProfitbricksApi {
     private Lan lan;
     private Location location;
     private Contract contract;
+    private Group group;
 
     /**
      * @return the dataCenter
@@ -259,5 +260,13 @@ public class ProfitbricksApi {
     public Contract getContract() {
         this.contract.setCredentials(credentials);
         return contract;
+    }
+
+    /**
+     * @return the contract
+     */
+    public Group getGroup() {
+        this.group.setCredentials(credentials);
+        return group;
     }
 }

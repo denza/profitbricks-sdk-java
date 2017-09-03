@@ -36,6 +36,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 public class User extends  ProfitbricksBase{
     private Properties properties = new Properties();
+    private Entities entities;
 
     /**
      * @return the properties
@@ -51,8 +52,38 @@ public class User extends  ProfitbricksBase{
         this.properties = properties;
     }
 
+    /**
+     * @return the entities
+     */
+    public Entities getEntities() {
+        if (entities == null) {
+            entities = new Entities();
+        }
+        return entities;
+    }
+
+    /**
+     * @param entities the entities to set
+     */
+    public void setEntities(Entities entities) {
+        this.entities = entities;
+    }
+
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Properties {
+    public static class AddToGroupProperties{
+        private  String groupId;
+
+        public String getGroupId() {
+            return groupId;
+        }
+
+        public void setGroupId(String groupId) {
+            this.groupId = groupId;
+        }
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Properties {
         private  String firstname;
         private  String lastname;
         private  String email;
@@ -106,6 +137,28 @@ public class User extends  ProfitbricksBase{
 
         public void setSecAuthActive(Boolean secAuthActive) {
             this.secAuthActive = secAuthActive;
+        }
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Entities {
+        private  Resources owns;
+        private  Resources groups;
+
+        public Resources getOwns() {
+            return owns;
+        }
+
+        public void setOwns(Resources owns) {
+            this.owns = owns;
+        }
+
+        public Resources getGroups() {
+            return groups;
+        }
+
+        public void setGroups(Resources groups) {
+            this.groups = groups;
         }
     }
 }

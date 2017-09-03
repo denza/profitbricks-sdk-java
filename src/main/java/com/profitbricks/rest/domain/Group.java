@@ -71,7 +71,7 @@ public class Group  extends ProfitbricksBase
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public class Properties {
+    public static class Properties {
         private String name;
         private Boolean createDataCenter;
         private  Boolean createSnapshot;
@@ -119,7 +119,25 @@ public class Group  extends ProfitbricksBase
         }
     }
 
-    public class Entities {
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Entities {
+        private Users users;
+        private  Resources resources;
 
+        public Users getUsers() {
+            return users;
+        }
+
+        public void setUsers(Users users) {
+            this.users = users;
+        }
+
+        public Resources getResources() {
+            return resources;
+        }
+
+        public void setResources(Resources resources) {
+            this.resources = resources;
+        }
     }
 }

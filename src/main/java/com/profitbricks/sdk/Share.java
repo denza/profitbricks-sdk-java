@@ -30,6 +30,12 @@
 
 package com.profitbricks.sdk;
 
+import com.profitbricks.rest.client.RestClientException;
+import com.profitbricks.rest.domain.Shares;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * @author denis@stackpointcloud.com
  */
@@ -37,6 +43,58 @@ public class Share extends ProfitbricksAPIBase{
     private String credentials;
 
     public Share() throws Exception {
-        super("shares", "groups");
+        super("shares", "um/groups");
+    }
+
+    /**
+     * Retrieve a list of Shares.
+     * @param groupId The unique ID of the group.
+     * @return Shares object with a list of Shares
+     */
+    public Shares getAllShares(String groupId) throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat(depth), null, Shares.class);
+    }
+
+    /**
+     * Retrieves the attributes of a specific share
+     * @param groupId The unique ID of the group.
+     * @param shareId The unique ID of the share.
+     * @return Share object with properties and metadata
+     */
+    public com.profitbricks.rest.domain.Share getShare(String groupId, String shareId) throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(shareId).concat(depth), null, com.profitbricks.rest.domain.Share.class);
+    }
+
+    /**
+     * Deletes a specific share.
+     * @param groupId The unique ID of the group.
+     * @param shareId The unique ID of the share.
+     */
+    public void deleteShare(String groupId, String shareId) throws RestClientException, IOException {
+        client.delete(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(shareId));
+    }
+
+    /**
+     * Create a single Share, you can add child items to trigger a composite provision.
+     * @param groupId The unique ID of the group
+     * @param  share object has the following properties:
+     * <br>
+     * editPrivilege= The group has permission to edit privileges on this resource.
+     * <br>
+     * sharePrivilege= The group has permission to share this resource.
+     * @return Share object with properties and metadata.
+     */
+    public com.profitbricks.rest.domain.Share createShare(String groupId, com.profitbricks.rest.domain.Share share) throws RestClientException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
+        return client.create(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource), share, com.profitbricks.rest.domain.Share.class, 202);
+    }
+
+    /**
+     * Updates a specific share.
+     * @param groupId The unique ID of the group
+     * @param shareId The unique ID of the share.
+     * @return Share object with properties and metadata
+     */
+    public com.profitbricks.rest.domain.Share updateShare(String groupId, String shareId, Object object) throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        return client.update(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(shareId), object, com.profitbricks.rest.domain.Share.class, 202);
     }
 }

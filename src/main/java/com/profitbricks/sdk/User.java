@@ -30,6 +30,15 @@
 
 package com.profitbricks.sdk;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.profitbricks.rest.client.RestClientException;
+import com.profitbricks.rest.domain.Users;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author denis@stackpointcloud.com
  */
@@ -38,6 +47,96 @@ public class User extends  ProfitbricksAPIBase{
     private String credentials;
 
     public User() throws Exception {
-        super("users", "");
+        super("users", "um/groups");
+    }
+
+    /**
+     * Retrieve a list of Users.
+     *
+     * @return Users object with a list of Users
+     */
+    public Users getAllUsers() throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource).concat(depth), null, Users.class);
+    }
+
+    /**
+     * Retrieve a list of Users for a group.
+     *@param groupId The unique ID of the group
+     * @return Users object with a list of Users
+     */
+    public Users getAllGroupUsers(String groupId) throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat(depth), null, Users.class);
+    }
+
+    /**
+     * Retrieves the attributes of a specific user
+     *
+     * @param userId The unique ID of the user.
+     * @return User object with properties and metadata
+     */
+    public com.profitbricks.rest.domain.User getUser(String userId) throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource).concat("/").concat(userId).concat(depth), null, com.profitbricks.rest.domain.User.class);
+    }
+
+    /**
+     * Deletes a specific user.
+     *
+     * @param userId The unique ID of the user.
+     */
+    public void deleteUser(String userId) throws RestClientException, IOException {
+        client.delete(getUrlBase().concat(resource).concat("/").concat(userId));
+    }
+
+    /**
+     * Create a single User, you can add child items to trigger a composite provision.
+     * @param  user object has the following properties:
+     * <br>
+     * firstname= The first name of the user.
+     * <br>
+     * lastname=The last name of the user.
+     * <br>
+     * email=The e-mail address of the user.
+     * <br>
+     * administrator=Indicates if the user has administrative rights.
+     * <br>
+     * forceSecAuth=Indicates if secure (two-factor) authentication was enabled for the user.
+     * <br>
+     * secAuthActive=Indicates if secure (two-factor) authentication is enabled for the user.
+     * @return User object with properties and metadata.
+     */
+    public com.profitbricks.rest.domain.User createUser(com.profitbricks.rest.domain.User user) throws RestClientException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
+        return client.create(getUrlBase().concat(resource), user, com.profitbricks.rest.domain.User.class, 202);
+    }
+
+    /**
+     * Updates a specific user.
+     *
+     * @param userId The unique ID of the user.
+     * @return User object with properties and metadata
+     */
+    public com.profitbricks.rest.domain.User updateUser(String userId, Object object) throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        return client.update(getUrlBase().concat(resource).concat("/").concat(userId), object, com.profitbricks.rest.domain.User.class, 202);
+    }
+
+    /**
+     * Adds a specific user to a specific group.
+     * @param groupId The unique ID of the group.
+     * @param userId The unique ID of the user.
+     * @return User object with properties and metadata
+     */
+    public com.profitbricks.rest.domain.User addUserToGroup(String groupId , String userId) throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException  {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("groupId", groupId);
+        return client.create(getUrlBase().concat(resource).concat("/").concat(userId),params,com.profitbricks.rest.domain.User.class, 202);
+    }
+
+    /**
+     * Removes a specific user from a specific group.
+     * @param groupId The unique ID of the group.
+     * @param userId The unique ID of the user.
+     * @return User object with properties and metadata
+     */
+    public void removeUserFromGroup(String groupId,String userId) throws RestClientException, IOException {
+        client.delete(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(userId),   200);
     }
 }

@@ -30,6 +30,11 @@
 
 package com.profitbricks.sdk;
 
+import com.profitbricks.rest.client.RestClientException;
+import com.profitbricks.rest.domain.Resources;
+
+import java.io.IOException;
+
 /**
  * @author denis@stackpointcloud.com
  */
@@ -37,6 +42,64 @@ public class Resource extends ProfitbricksAPIBase {
     private String credentials;
 
     public Resource() throws Exception {
-        super("resources", "");
+        super("um/resources", "");
+    }
+
+    /**
+     * You can retrieve a list of all resources
+     *
+     * @return Servers object with a list of servers in the specified datacenter.
+     */
+    public Resources getAllResources() throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource)
+                .concat(depth), null, Resources.class);
+    }
+
+    /**
+     * You can retrieve a list of datacenters
+     *
+     * @return Servers object with a list of datacenters.
+     */
+    public Resources getAlldatacenterResources() throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource)
+                .concat("/")
+                .concat("datacenter")
+                .concat(depth), null, Resources.class);
+    }
+
+    /**
+     * You can retrieve a list of images
+     *
+     * @return Servers object with a list of images.
+     */
+    public Resources getAllImageResources() throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource)
+                .concat("/")
+                .concat("image")
+                .concat(depth), null, Resources.class);
+    }
+
+    /**
+     * You can retrieve a list of snapshots
+     *
+     * @return Servers object with a list of snapshots.
+     */
+    public Resources getAllSnapshotResources() throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource)
+                .concat("/")
+                .concat("snapshot")
+                .concat(depth), null, Resources.class);
+    }
+
+    /**
+     * You can retrieve a list of ipblocks
+     *
+     * @return Servers object with a list of ipblocks.
+     */
+    public Resources getAllIpblockResources() throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource)
+                .concat("/")
+                .concat("ipblock")
+                .concat(depth), null, Resources.class);
     }
 }

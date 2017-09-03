@@ -29,8 +29,20 @@
  */
 package com.profitbricks.rest.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author denis@stackpointcloud.com
  */
 public class Resources extends ProfitbricksBase {
+    private List<Resource> items =  new ArrayList<Resource>();
+
+    public List<Resource> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Resource> items) {
+        this.items = items;
+    }
 }

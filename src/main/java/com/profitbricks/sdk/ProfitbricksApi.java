@@ -50,6 +50,11 @@ public class ProfitbricksApi {
         this.lan = new Lan();
         this.location = new Location();
         this.contract = new Contract();
+        this.group = new Group();
+        this.share = new Share();
+        this.user = new User();
+        this.resource = new Resource();
+        this.userManagement = new UserManagement();
     }
 
     private Datacenter dataCenter;
@@ -66,6 +71,10 @@ public class ProfitbricksApi {
     private Location location;
     private Contract contract;
     private Group group;
+    private Share share;
+    private User user;
+    private Resource resource;
+    private UserManagement userManagement;
 
     /**
      * @return the dataCenter
@@ -263,10 +272,53 @@ public class ProfitbricksApi {
     }
 
     /**
-     * @return the contract
+     * @return the group
      */
     public Group getGroup() {
         this.group.setCredentials(credentials);
         return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group.setCredentials(credentials);
+        this.group = group;
+    }
+
+    public Resource getResource() {
+        this.resource.setCredentials(credentials);
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource.setCredentials(credentials);
+        this.resource = resource;
+    }
+
+    public User getUser() {
+        this.user.setCredentials(credentials);
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user.setCredentials(credentials);
+        this.user = user;
+    }
+
+    public Share getShare() {
+        this.share.setCredentials(credentials);
+        return share;
+    }
+
+    public void setShare(Share share) {
+        this.share.setCredentials(credentials);
+        this.share = share;
+    }
+
+    public UserManagement getUserManagement() {
+        return userManagement;
+    }
+
+    public void setUserManagement(UserManagement userManagement) {
+        this.userManagement = userManagement;
     }
 }

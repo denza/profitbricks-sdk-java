@@ -87,6 +87,7 @@ public class User extends  ProfitbricksBase{
         private  String firstname;
         private  String lastname;
         private  String email;
+        private  String password;
         private  Boolean administrator;
         private  Boolean forceSecAuth;
         private  Boolean secAuthActive;
@@ -137,6 +138,14 @@ public class User extends  ProfitbricksBase{
 
         public void setSecAuthActive(Boolean secAuthActive) {
             this.secAuthActive = secAuthActive;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
         }
     }
 

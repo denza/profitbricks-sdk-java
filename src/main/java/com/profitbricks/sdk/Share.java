@@ -71,7 +71,7 @@ public class Share extends ProfitbricksAPIBase{
      * @param shareId The unique ID of the share.
      */
     public void deleteShare(String groupId, String shareId) throws RestClientException, IOException {
-        client.delete(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(shareId));
+        client.delete(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(shareId),202);
     }
 
     /**
@@ -85,7 +85,7 @@ public class Share extends ProfitbricksAPIBase{
      * @return Share object with properties and metadata.
      */
     public com.profitbricks.rest.domain.Share createShare(String groupId, com.profitbricks.rest.domain.Share share) throws RestClientException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
-        return client.create(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource), share, com.profitbricks.rest.domain.Share.class, 202);
+        return client.create(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(share.getResourceId()), share, com.profitbricks.rest.domain.Share.class, 202);
     }
 
     /**
@@ -95,6 +95,6 @@ public class Share extends ProfitbricksAPIBase{
      * @return Share object with properties and metadata
      */
     public com.profitbricks.rest.domain.Share updateShare(String groupId, String shareId, Object object) throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        return client.update(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(shareId), object, com.profitbricks.rest.domain.Share.class, 202);
+        return client.put(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(shareId), object, com.profitbricks.rest.domain.Share.class, 202);
     }
 }

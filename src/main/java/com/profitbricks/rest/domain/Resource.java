@@ -29,14 +29,61 @@
  */
 package com.profitbricks.rest.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * @author denis@stackpointcloud.com
  */
 public class Resource extends ProfitbricksBase{
+
+    private Properties properties = new Properties();
+    private Entities entities;
+
+    /**
+     * @return the properties
+     */
+    public Properties getProperties() {
+        return properties;
+    }
+
+    /**
+     * @param properties the properties to set
+     */
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
+
+    /**
+     * @return the entities
+     */
+    public Entities getEntities() {
+        if (entities == null) {
+            entities = new Entities();
+        }
+        return entities;
+    }
+
+    /**
+     * @param entities the entities to set
+     */
+    public void setEntities(Entities entities) {
+        this.entities = entities;
+    }
+
     public enum ResourceType{
         datacenter,
         image,
         snapshot,
         ipblock
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Properties{
+
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Entities {
+
     }
 }

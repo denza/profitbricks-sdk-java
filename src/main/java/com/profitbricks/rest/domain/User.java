@@ -83,7 +83,7 @@ public class User extends  ProfitbricksBase{
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Properties {
+    public class Properties {
         private  String firstname;
         private  String lastname;
         private  String email;
@@ -150,7 +150,7 @@ public class User extends  ProfitbricksBase{
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Entities {
+    public class Entities {
         private  Resources owns;
         private  Resources groups;
 

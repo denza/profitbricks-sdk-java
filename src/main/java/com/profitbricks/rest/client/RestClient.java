@@ -178,7 +178,7 @@ public class RestClient extends AbstractRestClient {
     public <T> T put(RequestInterceptor interceptor, String path, Object object, Class<T> entityClass, int expectedStatus)
             throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         HttpPut patch = contentTypePartialJson(newHttpPut(path));
-        HttpEntity entity = new StringEntity(toJson(object).toString(), Charsets.UTF_8);
+        HttpEntity entity = new StringEntity(toJson(WrappWithProperties(object)).toString(), Charsets.UTF_8);
         patch.setEntity(entity);
         HttpResponse response = execute(interceptor, patch, expectedStatus);
         if (response != null) {

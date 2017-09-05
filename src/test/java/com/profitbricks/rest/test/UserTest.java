@@ -71,6 +71,10 @@ public class UserTest {
     @BeforeClass
     public static void createUser() throws RestClientException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, InterruptedException {
         profitbricksApi.setCredentials(System.getenv("PROFITBRICKS_USERNAME"), System.getenv("PROFITBRICKS_PASSWORD"));
+        //Set email
+        email = "no-reply" + System.currentTimeMillis() + "@example.com";
+        email1 = "no-reply"+ (System.currentTimeMillis()+1) +"@example.com";
+
         //Create a group
         Group group = new Group();
 
@@ -93,7 +97,7 @@ public class UserTest {
         user.getProperties().setEmail(email);
         user.getProperties().setPassword("secretpassword123");
         user.getProperties().setAdministrator(true);
-        user.getProperties().setForceSecAuth(true);
+//        user.getProperties().setForceSecAuth(true);
 
         User newUser = profitbricksApi.getUser().createUser(user);
         userId = newUser.getId();
@@ -138,26 +142,26 @@ public class UserTest {
             User user = profitbricksApi.getUser().getUser("00000000-0000-0000-0000-000000000000");
             assertNotNull(user);
         }catch (RestClientException ex){
-            assertEquals(ex.response().getStatusLine().getStatusCode(), 422);
+            assertEquals(ex.response().getStatusLine().getStatusCode(), 404);
         }
     }
 
     @Test
     public void updateUser() throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
-        User.Properties object = new User().getProperties();
-        object.setFirstname("Jane");
-        object.setLastname("Doe");
-        object.setEmail(email1);
-        object.setAdministrator(false);
-        object.setForceSecAuth(false);
+        User user = new User();
+        user.getProperties().setFirstname("Jane");
+        user.getProperties().setLastname("Doe");
+        user.getProperties().setEmail(email1);
+        user.getProperties().setAdministrator(false);
+        user.getProperties().setForceSecAuth(false);
 
-        User updateUser = profitbricksApi.getUser().updateUser(userId, object);
-        assertEquals(object.getFirstname(), updateUser.getProperties().getFirstname());
-        assertEquals(object.getLastname(), updateUser.getProperties().getLastname());
-        assertEquals(object.getEmail(), updateUser.getProperties().getEmail());
-        assertEquals(object.getAdministrator(), updateUser.getProperties().getAdministrator());
-        assertEquals(object.getForceSecAuth(), updateUser.getProperties().getForceSecAuth());
+        User updateUser = profitbricksApi.getUser().updateUser(userId, user.getProperties());
+        assertEquals(user.getProperties().getFirstname(), updateUser.getProperties().getFirstname());
+        assertEquals(user.getProperties().getLastname(), updateUser.getProperties().getLastname());
+        assertEquals(user.getProperties().getEmail(), updateUser.getProperties().getEmail());
+        assertEquals(user.getProperties().getAdministrator(), updateUser.getProperties().getAdministrator());
+        assertEquals(user.getProperties().getForceSecAuth(), updateUser.getProperties().getForceSecAuth());
     }
 
     @AfterClass

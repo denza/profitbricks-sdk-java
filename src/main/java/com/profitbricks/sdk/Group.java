@@ -69,7 +69,7 @@ public class Group extends ProfitbricksAPIBase {
      * @param groupId The unique ID of the group.
      */
     public void deleteGroup(String groupId) throws RestClientException, IOException {
-        client.delete(getUrlBase().concat(resource).concat("/").concat(groupId));
+        client.delete(getUrlBase().concat(resource).concat("/").concat(groupId),202);
     }
 
     /**

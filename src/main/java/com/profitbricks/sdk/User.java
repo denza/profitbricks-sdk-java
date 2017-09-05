@@ -47,7 +47,7 @@ public class User extends  ProfitbricksAPIBase{
     private String credentials;
 
     public User() throws Exception {
-        super("users", "um/groups");
+        super("um/users","");
     }
 
     /**
@@ -65,7 +65,7 @@ public class User extends  ProfitbricksAPIBase{
      * @return Users object with a list of Users
      */
     public Users getAllGroupUsers(String groupId) throws RestClientException, IOException {
-        return client.get(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat(depth), null, Users.class);
+        return client.get(getUrlBase().concat("um/groups").concat("/").concat(groupId).concat("/").concat("users").concat(depth), null, Users.class);
     }
 
     /**
@@ -84,7 +84,7 @@ public class User extends  ProfitbricksAPIBase{
      * @param userId The unique ID of the user.
      */
     public void deleteUser(String userId) throws RestClientException, IOException {
-        client.delete(getUrlBase().concat(resource).concat("/").concat(userId));
+        client.delete(getUrlBase().concat(resource).concat("/").concat(userId),202);
     }
 
     /**
@@ -114,8 +114,8 @@ public class User extends  ProfitbricksAPIBase{
      * @param userId The unique ID of the user.
      * @return User object with properties and metadata
      */
-    public com.profitbricks.rest.domain.User updateUser(String userId, Object object) throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        return client.update(getUrlBase().concat(resource).concat("/").concat(userId), object, com.profitbricks.rest.domain.User.class, 202);
+    public com.profitbricks.rest.domain.User updateUser(String userId, com.profitbricks.rest.domain.User.Properties object) throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        return client.put(getUrlBase().concat(resource).concat("/").concat(userId), object, com.profitbricks.rest.domain.User.class, 202);
     }
 
     /**
@@ -137,6 +137,6 @@ public class User extends  ProfitbricksAPIBase{
      * @return User object with properties and metadata
      */
     public void removeUserFromGroup(String groupId,String userId) throws RestClientException, IOException {
-        client.delete(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(userId),   200);
+        client.delete(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(userId),   202);
     }
 }

@@ -48,7 +48,7 @@ public class Resource extends ProfitbricksAPIBase {
     /**
      * You can retrieve a list of all resources
      *
-     * @return Servers object with a list of servers in the specified datacenter.
+     * @return Resources object with a list of resources
      */
     public Resources getAllResources() throws RestClientException, IOException {
         return client.get(getUrlBase().concat(resource)
@@ -58,9 +58,9 @@ public class Resource extends ProfitbricksAPIBase {
     /**
      * You can retrieve a list of datacenters
      *
-     * @return Servers object with a list of datacenters.
+     * @return Resources object with a list of datacenters.
      */
-    public Resources getAlldatacenterResources() throws RestClientException, IOException {
+    public Resources getAllDatacenters() throws RestClientException, IOException {
         return client.get(getUrlBase().concat(resource)
                 .concat("/")
                 .concat("datacenter")
@@ -70,9 +70,9 @@ public class Resource extends ProfitbricksAPIBase {
     /**
      * You can retrieve a list of images
      *
-     * @return Servers object with a list of images.
+     * @return Resources object with a list of images.
      */
-    public Resources getAllImageResources() throws RestClientException, IOException {
+    public Resources getAllImages() throws RestClientException, IOException {
         return client.get(getUrlBase().concat(resource)
                 .concat("/")
                 .concat("image")
@@ -82,9 +82,9 @@ public class Resource extends ProfitbricksAPIBase {
     /**
      * You can retrieve a list of snapshots
      *
-     * @return Servers object with a list of snapshots.
+     * @return Resources object with a list of snapshots.
      */
-    public Resources getAllSnapshotResources() throws RestClientException, IOException {
+    public Resources getAllSnapshots() throws RestClientException, IOException {
         return client.get(getUrlBase().concat(resource)
                 .concat("/")
                 .concat("snapshot")
@@ -92,14 +92,75 @@ public class Resource extends ProfitbricksAPIBase {
     }
 
     /**
-     * You can retrieve a list of ipblocks
+     * You can retrieve a list of IPBlocks
      *
-     * @return Servers object with a list of ipblocks.
+     * @return Resources object with a list of IPBlocks.
      */
-    public Resources getAllIpblockResources() throws RestClientException, IOException {
+    public Resources getAllIPBlocks() throws RestClientException, IOException {
         return client.get(getUrlBase().concat(resource)
                 .concat("/")
                 .concat("ipblock")
                 .concat(depth), null, Resources.class);
     }
+
+    /**
+     * You can retrieve a datacenter
+     *
+     * @param datacenterId The ID of the specific datacenter.
+     * @return Resource object with properties and metadata.
+     */
+    public Resource getDatacenter(String datacenterId) throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource)
+                .concat("/")
+                .concat("datacenter")
+                .concat("/")
+                .concat(datacenterId)
+                .concat(depth), null, Resource.class);
+    }
+
+    /**
+     * You can retrieve an image
+     *
+     * @param imageId The ID of the specific image.
+     * @return Resource object with properties and metadata.
+     */
+    public Resource getImage(String imageId) throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource)
+                .concat("/")
+                .concat("image")
+                .concat("/")
+                .concat(imageId)
+                .concat(depth), null, Resource.class);
+    }
+
+    /**
+     * You can retrieve a snapshot
+     *
+     * @param snapshotId The ID of the specific snapshot.
+     * @return Resource object with properties and metadata.
+     */
+    public Resource getSnapshot(String snapshotId) throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource)
+                .concat("/")
+                .concat("snapshot")
+                .concat("/")
+                .concat(snapshotId)
+                .concat(depth), null, Resource.class);
+    }
+
+    /**
+     * You can retrieve an IP Block
+     *
+     * @param ipblockId The ID of the specific IP Block.
+     * @return Resource object with properties and metadata.
+     */
+    public Resource getIPBlock(String ipblockId) throws RestClientException, IOException {
+        return client.get(getUrlBase().concat(resource)
+                .concat("/")
+                .concat("ipblock")
+                .concat("/")
+                .concat(ipblockId)
+                .concat(depth), null, Resource.class);
+    }
+
 }

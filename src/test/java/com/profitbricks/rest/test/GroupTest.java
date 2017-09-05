@@ -66,7 +66,7 @@ public class GroupTest {
         profitbricksApi.setCredentials(System.getenv("PROFITBRICKS_USERNAME"), System.getenv("PROFITBRICKS_PASSWORD"));
         Group group = new Group();
 
-        group.getProperties().setName("Group SDK Test");
+        group.getProperties().setName("Java SDK Test");
         group.getProperties().setCreateDataCenter(true);
         group.getProperties().setCreateSnapshot(true);
         group.getProperties().setReserveIp(true);
@@ -112,17 +112,17 @@ public class GroupTest {
     @Test
     public void testGetGroupFail() throws RestClientException, IOException {
         try {
-            Group group = profitbricksApi.getGroup().getGroup("412");
+            Group group = profitbricksApi.getGroup().getGroup("00000000-0000-0000-0000-000000000000");
             assertNotNull(group);
         }catch (RestClientException ex){
-            assertEquals(ex.response().getStatusLine().getStatusCode(), 404);
+            assertEquals(ex.response().getStatusLine().getStatusCode(), 422);
         }
     }
 
     @Test
-    public void updateDataCenter() throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public void updateGroup() throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         String newName = "Java SDK Test - RENAME";
-        Group.Properties object = new Group().new Properties();
+        Group.Properties object = new Group().getProperties();
         object.setName(newName);
         object.setCreateDataCenter(false);
 

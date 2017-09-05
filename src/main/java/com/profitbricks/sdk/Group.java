@@ -98,6 +98,6 @@ public class Group extends ProfitbricksAPIBase {
      * @return Group object with properties and metadata
      */
     public com.profitbricks.rest.domain.Group updateGroup(String groupId, Object object) throws RestClientException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        return client.update(getUrlBase().concat(resource).concat("/").concat(groupId), object, com.profitbricks.rest.domain.Group.class, 202);
+        return client.put(getUrlBase().concat(resource).concat("/").concat(groupId), object, com.profitbricks.rest.domain.Group.class, 202);
     }
 }

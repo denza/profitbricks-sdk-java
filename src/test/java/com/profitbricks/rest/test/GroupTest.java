@@ -40,9 +40,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -115,7 +113,7 @@ public class GroupTest {
             Group group = profitbricksApi.getGroup().getGroup("00000000-0000-0000-0000-000000000000");
             assertNotNull(group);
         }catch (RestClientException ex){
-            assertEquals(ex.response().getStatusLine().getStatusCode(), 422);
+            assertEquals(ex.response().getStatusLine().getStatusCode(), 404);
         }
     }
 
@@ -128,7 +126,7 @@ public class GroupTest {
 
         Group updateGroup = profitbricksApi.getGroup().updateGroup(groupId, object);
         assertEquals(newName, updateGroup.getProperties().getName());
-        assertEquals(true, updateGroup.getProperties().getCreateDataCenter());
+        assertFalse( updateGroup.getProperties().getCreateDataCenter());
     }
 
     @AfterClass

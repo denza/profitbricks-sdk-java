@@ -33,4 +33,10 @@ package com.profitbricks.rest.domain;
  * @author denis@stackpointcloud.com
  */
 public class Resource extends ProfitbricksBase{
+    public enum ResourceType{
+        datacenter,
+        image,
+        snapshot,
+        ipblock
+    }
 }

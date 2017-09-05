@@ -26,10 +26,26 @@ public class ShareTest {
 
     static String groupId;
     static String shareId;
+    static  String dataCenterId;
 
     @BeforeClass
     public static void createShare() throws RestClientException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, InterruptedException {
         profitbricksApi.setCredentials(System.getenv("PROFITBRICKS_USERNAME"), System.getenv("PROFITBRICKS_PASSWORD"));
+        //Create a datacenter
+        DataCenter datacenter = new DataCenter();
+
+        datacenter.getProperties().setName("SDK TEST DC - Data center");
+        datacenter.getProperties().setLocation("us/las");
+        datacenter.getProperties().setDescription("SDK TEST Description");
+
+        DataCenter newDatacenter = profitbricksApi.getDataCenter().createDataCenter(datacenter);
+        dataCenterId = newDatacenter.getId();
+
+        waitTillProvisioned(newDatacenter.getRequestId());
+
+        assertEquals(newDatacenter.getProperties().getName(), datacenter.getProperties().getName());
+
+        //Create a group
         Group group = new Group();
 
         group.getProperties().setName("Java SDK Test");
@@ -48,11 +64,10 @@ public class ShareTest {
 
         Share share = new Share();
 
-        share.setResourceId(groupId);
         share.getProperties().setEditPrivilege(true);
         share.getProperties().setSharePrivilege(true);
 
-        Share newShare =  profitbricksApi.getShare().createShare(groupId,share);
+        Share newShare =  profitbricksApi.getShare().createShare(groupId,dataCenterId,share);
         shareId = newShare.getId();
     }
 
@@ -93,7 +108,7 @@ public class ShareTest {
             Share share = profitbricksApi.getShare().getShare(groupId,"00000000-0000-0000-0000-000000000000");
             assertNotNull(share);
         }catch (RestClientException ex){
-            assertEquals(ex.response().getStatusLine().getStatusCode(), 422);
+            assertEquals(ex.response().getStatusLine().getStatusCode(), 404);
         }
     }
 
@@ -109,7 +124,8 @@ public class ShareTest {
 
     @AfterClass
     public static void cleanup() throws RestClientException, IOException {
-        profitbricksApi.getShare().deleteShare(groupId,shareId);
+        profitbricksApi.getShare().deleteShare(groupId,dataCenterId);
+        profitbricksApi.getDataCenter().deleteDataCenter(dataCenterId);
         profitbricksApi.getGroup().deleteGroup(groupId);
     }
 }

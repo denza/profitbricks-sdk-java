@@ -37,7 +37,6 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
  */
 public class Share extends ProfitbricksBase{
     private Properties properties = new Properties();
-    private  String resourceId;
 
     /**
      * @return the properties
@@ -51,14 +50,6 @@ public class Share extends ProfitbricksBase{
      */
     public void setProperties(Properties properties) {
         this.properties = properties;
-    }
-
-    public String getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(String resourceId) {
-        this.resourceId = resourceId;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

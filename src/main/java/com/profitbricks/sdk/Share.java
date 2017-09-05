@@ -84,8 +84,8 @@ public class Share extends ProfitbricksAPIBase{
      * sharePrivilege= The group has permission to share this resource.
      * @return Share object with properties and metadata.
      */
-    public com.profitbricks.rest.domain.Share createShare(String groupId, com.profitbricks.rest.domain.Share share) throws RestClientException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
-        return client.create(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(share.getResourceId()), share, com.profitbricks.rest.domain.Share.class, 202);
+    public com.profitbricks.rest.domain.Share createShare(String groupId, String resourceId, com.profitbricks.rest.domain.Share share) throws RestClientException, IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
+        return client.create(getUrlBase().concat(parentResource).concat("/").concat(groupId).concat("/").concat(resource).concat("/").concat(resourceId), share, com.profitbricks.rest.domain.Share.class, 202);
     }
 
     /**

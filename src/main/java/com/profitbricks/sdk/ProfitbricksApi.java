@@ -54,7 +54,6 @@ public class ProfitbricksApi {
         this.share = new Share();
         this.user = new User();
         this.resource = new Resource();
-        this.userManagement = new UserManagement();
     }
 
     private Datacenter dataCenter;
@@ -74,7 +73,6 @@ public class ProfitbricksApi {
     private Share share;
     private User user;
     private Resource resource;
-    private UserManagement userManagement;
 
     /**
      * @return the dataCenter
@@ -312,13 +310,5 @@ public class ProfitbricksApi {
     public void setShare(Share share) {
         this.share.setCredentials(credentials);
         this.share = share;
-    }
-
-    public UserManagement getUserManagement() {
-        return userManagement;
-    }
-
-    public void setUserManagement(UserManagement userManagement) {
-        this.userManagement = userManagement;
     }
 }

@@ -1642,7 +1642,7 @@ The following table describes the request arguments:
 | groupId | **yes** | string | The ID of the group. |
 | resourceId | **yes** | string | The ID of the resource.
 
-    getShare(String groupId,String resourceId);
+    getShare(String groupId, String resourceId);
 
 ---
 
@@ -1699,19 +1699,7 @@ Removes a resource share from a group.
 
 Retrieves a list of all users.
 
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| options | no | string | The options of the resource. |
-
-
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| group_id | no | string | The ID of the group. |
-| depth | no | int | An integer value of 0 - 5 that affects the amount of detail returned. |
-
-    response =  ProfitBricks::User.list()
+    getAllUsers()
 
 ---
 
@@ -1721,17 +1709,9 @@ Retrieves a single user.
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| user_id | **yes** | string | The ID of the user. |
-| options | no | string | The options of the resource. |
+| userId | **yes** | string | The ID of the user. |
 
-
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| depth | no | int | An integer value of 0 - 5 that affects the amount of detail returned. |
-
-    response = ProfitBricks::User.get(user_id)
+    getUser(String userId)
 
 ---
 
@@ -1748,18 +1728,9 @@ The following table describes the request arguments:
 | email | **yes**  | bool | An e-mail address for the user. |
 | password | **yes**  | bool | A password for the user. |
 | administrator | no | bool | Assigns the user have administrative rights. |
-| force_sec_auth | no | bool | Indicates if secure (two-factor) authentication should be forced for the user. |
+| forceSecAuth | no | bool | Indicates if secure (two-factor) authentication should be forced for the user. |
 
-    user = {
-            firstname: 'John',
-            lastname: 'Doe',
-            email: 'no-reply@example.com',
-            password: 'secretpassword123',
-            administrator: 'administrator',
-            force_sec_auth: false
-          }
-
-    response = ProfitBricks::User.create(user)
+    createUser(User user)
 
 ---
 
@@ -1771,21 +1742,14 @@ The following table describes the request arguments:
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| user_id | **yes** | string | The ID of the user. |
-| firstname | **yes** | string | A name for the user. |
-| lastname | **yes**  | bool | A name for the user. |
-| email | **yes**  | bool | An e-mail address for the user. |
-| administrator | **yes** | bool | Assigns the user have administrative rights. |
-| force_sec_auth | **yes** | bool | Indicates if secure (two-factor) authentication should be forced for the user. |
+| userId | **yes** | string | The ID of the user. |
+| user.firstname | **yes** | string | A name for the user. |
+| user.lastname | **yes**  | bool | A name for the user. |
+| user.email | **yes**  | bool | An e-mail address for the user. |
+| user.administrator | **yes** | bool | Assigns the user have administrative rights. |
+| user.forceSecAuth | **yes** | bool | Indicates if secure (two-factor) authentication should be forced for the user. |
 
-    user = ProfitBricks::User.get(user_id)
-    response = user.update(
-    administrator: false,
-    firstname: 'John',
-    lastname: 'Doe',
-    email: 'no-reply@example.com',
-    force_sec_auth: false
-    )
+    updateUser(String userId,User.Properties user)
 
 ---
 
@@ -1795,10 +1759,9 @@ Removes a user.
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| user_id | **yes** | string | The ID of the user. |
+| userId | **yes** | string | The ID of the user. |
 
-    user = ProfitBricks::User.get(user_id)
-    response = user.delete
+    deleteUser(String userId)
 
 ---
 
@@ -1808,17 +1771,9 @@ Retrieves a list of all users that are members of a particular group.
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| options | no | string | The options of the resource. |
+| groupId | **yes**| string | The ID of the group. |
 
-
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| group_id | no| string | The ID of the group. |
-| depth | no | int | An integer value of 0 - 5 that affects the amount of detail returned. |
-
-    response = ProfitBricks::User.list(group_id: 'UUID')
+    getAllGroupUsers(String groupId)
 
 ---
 
@@ -1830,10 +1785,10 @@ The following table describes the request arguments:
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| group_id | **yes** | string | The ID of the group. |
-| user_id | **yes** | string | The ID of the user. |
+| groupId | **yes** | string | The ID of the group. |
+| userId | **yes** | string | The ID of the user. |
 
-    response = user = ProfitBricks::User.add_to_group(group_id,user_id)
+    addUserToGroup(String groupId , String userId)
 
 ---
 
@@ -1843,10 +1798,10 @@ Removes a user from a group.
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| group_id | **yes** | string | The ID of the group. |
-| user_id | **yes** | string | The ID of the user. |
+| groupId | **yes** | string | The ID of the group. |
+| userId | **yes** | string | The ID of the user. |
 
-    response = ProfitBricks::User.remove_from_group(group_id,user_id)
+    removeUserFromGroup(String groupId,String userId)
 
 ---
 
@@ -1860,19 +1815,11 @@ The following table describes the request arguments:
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| resource_type | no | string | The resource type: `datacenter`, `image`, `snapshot` or `ipblock`. |
-| options | no | string | The options of the resource. |
+| resourceType | no | string | The resource type: `datacenter`, `image`, `snapshot` or `ipblock`. |
 
+    getAllResources()
 
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| depth | no | int | An integer value of 0 - 5 that affects the amount of detail returned. |
-
-    response = ProfitBricks::Resource.list
-
-    response = ProfitBricks::Resource.list_by_type('datacenter')
+    getAllByType(Resource.ResourceType resourceType)
 
 ---
 
@@ -1884,18 +1831,10 @@ The following table describes the request arguments:
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| resource_type | **yes** | string | The resource type: `datacenter`, `image`, `snapshot` or `ipblock`. |
-| resource_id | **yes** | string | The ID of the resource. |
-| options | no | string | The options of the resource. |
+| resourceType | **yes** | string | The resource type: `datacenter`, `image`, `snapshot` or `ipblock`. |
+| resourceId | **yes** | string | The ID of the resource. |
 
-
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| depth | no | int | An integer value of 0 - 5 that affects the amount of detail returned. |
-
-    response = ProfitBricks::Resource.get('datacenter', datacenter_id)
+    getByType(Resource.ResourceType resourceType, String resourceId)
 
 ---
 
@@ -1905,18 +1844,7 @@ The following table describes the options arguments:
 
 Retrieves information about the resource limits for a particular contract and the current resource usage.
 
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| options | no | string | The options of the resource. |
-
-
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| depth | no | int | An integer value of 0 - 5 that affects the amount of detail returned. |
-
-    response = ProfitBricks::Contract.get
+    getContract()
 
 ---
 

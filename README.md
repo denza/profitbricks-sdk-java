@@ -1540,6 +1540,8 @@ getLocation(String id)
 
 ---
 
+### Groups
+
 #### List Groups
 
 Retrieves a list of all groups.
@@ -1643,6 +1645,8 @@ The following table describes the request arguments:
     response = group.delete
 
 ---
+
+### Shares
 
 #### List Shares
 
@@ -1748,6 +1752,8 @@ Removes a resource share from a group.
     ProfitBricks::Share.delete(group_id,datacenter_id)
 
 ---
+
+### Users
 
 #### List Users
 
@@ -1903,6 +1909,8 @@ Removes a user from a group.
     response = ProfitBricks::User.remove_from_group(group_id,user_id)
 
 ---
+
+### Resources
 
 #### List Resources
 

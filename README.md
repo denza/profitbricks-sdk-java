@@ -1546,18 +1546,8 @@ getLocation(String id)
 
 Retrieves a list of all groups.
 
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| options | no| string | The options of the resource. |
 
-
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| depth | no | int | An integer value of 0 - 5 that affects the amount of detail returned. |
-
-    groups = ProfitBricks::Group.list()
+    getAllGroups
 
 ---
 
@@ -1569,17 +1559,10 @@ The following table describes the request arguments:
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| group_id | **yes** | string | The ID of the group. |
-| options | no | string | The options of the resource. |
+| groupId | **yes** | string | The ID of the group. |
 
 
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| depth | no | int | An integer value of 0 - 5 that affects the amount of detail returned. |
-
-    response = ProfitBricks::Group.get(group_id)
+    getGroup(String groupId)
 
 ---
 
@@ -1592,20 +1575,12 @@ The following table describes the request arguments:
 | Name | Required | Type | Description |
 |---|:-:|---|---|
 | name | **yes** | string | The ID of the group. |
-| create_datacenter | no | bool | Indicates if the group is allowed to create virtual data centers. |
-| create_snapshot | no | bool | Indicates if the group is allowed to create snapshots. |
-| reserve_ip | no | bool | Indicates if the group is allowed to reserve IP addresses. |
-| access_activity_log | no | bool | Indicates if the group is allowed to access activity log. |
+| createDatacenter | no | bool | Indicates if the group is allowed to create virtual data centers. |
+| createSnapshot | no | bool | Indicates if the group is allowed to create snapshots. |
+| reserveIp | no | bool | Indicates if the group is allowed to reserve IP addresses. |
+| accessActivityLog | no | bool | Indicates if the group is allowed to access activity log. |
 
-  group = {
-            name: 'my group',
-            create_datacenter: 'true',
-            create_snapshot: 'true',
-            reserve_ip: 'true',
-            access_activity_log: 'true'
-          }
-
-  response = ProfitBricks::Group.create(group)
+    createGroup(Group group)
 
 ---
 
@@ -1618,17 +1593,13 @@ The following table describes the request arguments:
 | Name | Required | Type | Description |
 |---|:-:|---|---|
 | group_id | **yes** | string | The ID of the group. |
-| name | **yes** | string | The ID of the group. |
-| create_datacenter | no | bool | Indicates if the group is allowed to create virtual data centers. |
-| create_snapshot | no | bool | Indicates if the group is allowed to create snapshots. |
-| reserve_ip | no | bool | Indicates if the group is allowed to reserve IP addresses. |
-| access_activity_log | no | bool | Indicates if the group is allowed to access activity log. |
+| group.name | **yes** | string | The ID of the group. |
+| group.createDatacenter | no | bool | Indicates if the group is allowed to create virtual data centers. |
+| group.createSnapshot | no | bool | Indicates if the group is allowed to create snapshots. |
+| group.reserveIp | no | bool | Indicates if the group is allowed to reserve IP addresses. |
+| group.accessActivityLog | no | bool | Indicates if the group is allowed to access activity log. |
 
-    group = ProfitBricks::Group.get(group_id)
-    group = group.update(
-    name: 'my group RENAME',
-    create_datacenter: false
-    )
+      updateGroup(String groupId, Group.Properties group)
 
 ---
 
@@ -1640,9 +1611,9 @@ The following table describes the request arguments:
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| group_id | **yes** | string | The ID of the group. |
-    group = ProfitBricks::Group.get(group_id)
-    response = group.delete
+| groupId | **yes** | string | The ID of the group. |
+
+      deleteGroup(String groupId)
 
 ---
 

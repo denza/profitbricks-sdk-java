@@ -1592,8 +1592,8 @@ The following table describes the request arguments:
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| group_id | **yes** | string | The ID of the group. |
-| group.name | **yes** | string | The ID of the group. |
+| groupId | **yes** | string | The ID of the group. |
+| group.name | no | string | The ID of the group. |
 | group.createDatacenter | no | bool | Indicates if the group is allowed to create virtual data centers. |
 | group.createSnapshot | no | bool | Indicates if the group is allowed to create snapshots. |
 | group.reserveIp | no | bool | Indicates if the group is allowed to reserve IP addresses. |
@@ -1625,16 +1625,9 @@ Retrieves a list of all shares though a group.
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| group_id | **yes** | string | The ID of the group. |
-| options | no | string | The options of the resource. |
+| groupId | **yes** | string | The ID of the group. |
 
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| depth | no | int | An integer value of 0 - 5 that affects the amount of detail returned. |
-
-    response = ProfitBricks::Share.list(group_id)
+    getAllShares(String groupId)
 
 ---
 
@@ -1646,20 +1639,10 @@ The following table describes the request arguments:
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| group_id | **yes** | string | The ID of the group. |
-| resource_id | **yes** | string | The ID of the resource. |
-| options | no | string | The options of the resource. |
+| groupId | **yes** | string | The ID of the group. |
+| resourceId | **yes** | string | The ID of the resource.
 
-
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| depth | no | int | An integer value of 0 - 5 that affects the amount of detail returned. |
-
-    response = ProfitBricks::Share.get(
-        group_id,
-        resource_id)
+    getShare(String groupId,String resourceId);
 
 ---
 
@@ -1671,17 +1654,12 @@ The following table describes the request arguments:
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| group_id | **yes** | string | The ID of the group. |
-| resource_id | **yes** | string | The ID of the resource. |
-| edit_privilege | no | string | Indicates that the group has permission to edit privileges on the resource. |
-| share_privilege | no | string | Indicates that the group has permission to share the resource. |
+| groupId | **yes** | string | The ID of the group. |
+| resourceId | **yes** | string | The ID of the resource. |
+| editPrivilege | no | string | Indicates that the group has permission to edit privileges on the resource. |
+| sharePrivilege | no | string | Indicates that the group has permission to share the resource. |
 
-    share = {
-              edit_privilege: 'true',
-              share_privilege: 'true',
-              resource_id = datacenter_id
-            }
-    response = ProfitBricks::Share.create(group_id,share)
+    createShare(String groupId, String resourceId, Share share)
 
 ---
 
@@ -1693,21 +1671,12 @@ The following table describes the request arguments:
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| group_id | **yes** | string | The ID of the group. |
-| resource_id | **yes** | string | The ID of the resource. |
-| options | no | string | The options of the resource. |
+| groupId | **yes** | string | The ID of the group. |
+| resourceId | **yes** | string | The ID of the resource. |
+| share.editPrivilege | no | string | Indicates that the group has permission to edit privileges on the resource. |
+| share.sharePrivilege | no | string | Indicates that the group has permission to share the resource. |
 
-
-The following table describes the options arguments:
-
-| Name | Required | Type | Description |
-|---|:-:|---|---|
-| edit_privilege | no | string | Indicates that the group has permission to edit privileges on the resource. |
-| share_privilege | no | string | Indicates that the group has permission to share the resource. |
-
-    share = ProfitBricks::Share.update(group_id,datacenter_id,{
-      edit_privilege: false
-    })
+    createShare(String groupId, String resourceId, Share.Properties share)
 
 ---
 
@@ -1717,10 +1686,10 @@ Removes a resource share from a group.
 
 | Name | Required | Type | Description |
 |---|:-:|---|---|
-| group_id | **yes** | string | The ID of the group. |
-| resource_id | **yes** | string | The ID of the resource. |
+| groupId | **yes** | string | The ID of the group. |
+| resourceId | **yes** | string | The ID of the resource. |
 
-    ProfitBricks::Share.delete(group_id,datacenter_id)
+    deleteShare(String groupId, String resourceId)
 
 ---
 

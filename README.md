@@ -90,7 +90,7 @@ After the SDK is downloaded:
         <dependency>
             <groupId>com.profitbricks.rest.client</groupId>
             <artifactId>profitbricks-sdk-java</artifactId>
-            <version>4.0.0</version>
+            <version>4.1.0</version>
         </dependency>
 
 ## Usage

@@ -1085,6 +1085,14 @@ Creates a LAN within a data center.
 | name | no | string | The name of your LAN. |
 | isPublic | no | bool | Boolean indicating if the LAN faces the public Internet or not. |
 | nics | no | string collection | A collection of NICs associated with the LAN. |
+| ipFailover | no | collection | Attributes related to IP failover groups. |
+
+The ipFailover collection contains two attributes:
+
+| Name | Required | Type | Description |
+|---|---|---|---|
+| ip | **yes** | string | The reserved public IP address assigned to the IP failover group. |
+| nicUuid | **yes** | string | The UUID of the "master" NIC for the failover group. |
 
 ```
 createLan(String dataCenterId, Lan lan)
@@ -1120,6 +1128,14 @@ Performs updates to the attributes of a LAN.
 | dataCenterId | **yes** | string | The ID of the data center. |
 | lanId | **yes** | string | The ID of the LAN. |
 | isPublic | no | bool | Boolean indicating if the LAN faces the public Internet or not. |
+| ipFailover | no | collection | Attributes related to IP failover groups. |
+
+The ipFailover collection contains two attributes:
+
+| Name | Required | Type | Description |
+|---|---|---|---|
+| ip | **yes** | string | The reserved public IP address assigned to the IP failover group. |
+| nicUuid | **yes** | string | The UUID of the "master" NIC for the failover group. |
 
 After retrieving a LAN, you can change its properties and call the `updateLan` method:
 

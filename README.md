@@ -419,7 +419,6 @@ Creates a server within an existing data center. You can configure additional pr
 | AUTO | Automatically selected zone |
 | ZONE_1 | Zone 1 |
 | ZONE_2 | Zone 2 |
-| ZONE_3 | Zone 3 |
 
 ```
 createServer(String dataCenterId, Server server)
@@ -654,7 +653,8 @@ Creates a volume within the data center.
 | size | **yes** | int | The size of the volume in GB. |
 | type | **yes** | string | The volume type, HDD or SSD. |
 | image | **yes*** | string | The image or snapshot ID. |
-| licenceType | **yes*** | string | The licence type of the volume. Options: LINUX, WINDOWS, UNKNOWN, OTHER |
+| imageAlias | **yes*** | string | An alias to a ProfitBricks public image. Use instead of "image". |
+| licenceType | **yes*** | string | The licence type of the volume. Options: LINUX, WINDOWS, WINDOWS2016, UNKNOWN, OTHER |
 | imagePassword | **yes**** | string | One-time password is set on the Image for the appropriate account. This field may only be set in creation requests. When reading, it always returns null. Password has to contain 8-50 characters. Only these characters are allowed: [abcdefghjkmnpqrstuvxABCDEFGHJKLMNPQRSTUVX23456789] |
 | sshKeys | **yes**** | string | SSH keys to allow access to the volume via SSH |
 | name | no | string | The name of the volume. |  

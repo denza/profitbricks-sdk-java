@@ -653,8 +653,12 @@ Creates a volume within the data center.
 | size | **yes** | int | The size of the volume in GB. |
 | type | **yes** | string | The volume type, HDD or SSD. |
 | image | **yes*** | string | The image or snapshot ID. |
+<<<<<<< HEAD
 | imageAlias | **yes*** | string | An alias to a ProfitBricks public image. Use instead of "image". |
 | licenceType | **yes*** | string | The licence type of the volume. Options: LINUX, WINDOWS, WINDOWS2016, UNKNOWN, OTHER |
+=======
+| licenceType | **yes*** | string | The licence type of the volume. Options: LINUX, WINDOWS, UNKNOWN, OTHER |
+>>>>>>> 7f8ee4eff9c4e671bcc849b106e6158b21407144
 | imagePassword | **yes**** | string | One-time password is set on the Image for the appropriate account. This field may only be set in creation requests. When reading, it always returns null. Password has to contain 8-50 characters. Only these characters are allowed: [abcdefghjkmnpqrstuvxABCDEFGHJKLMNPQRSTUVX23456789] |
 | sshKeys | **yes**** | string | SSH keys to allow access to the volume via SSH |
 | name | no | string | The name of the volume. |  
@@ -1324,7 +1328,11 @@ Creates an IP block.
 
 | Name | Required | Type | Description |
 |---|---|---|---|
+<<<<<<< HEAD
 | ipBlock.location | **yes** | string | This must be one of the following locations: us/las, us/ewr, de/fra, de/fkb. |
+=======
+| ipBlock.location | **yes** | string | This must be one of the following locations: us/las, de/fra, de/fkb. |
+>>>>>>> 7f8ee4eff9c4e671bcc849b106e6158b21407144
 | ipBlock.size | **yes** | int | The size of the IP block you want. |
 | ipBlock.name | no | string | A descriptive name for the IP block |
 
@@ -1401,7 +1409,11 @@ Performs updates to attributes of a snapshot.
 | discVirtioHotUnplug | no | bool | This volume is capable of Virt-IO drive hot unplug (no reboot required) |
 | discScsiHotPlug | no | bool | This volume is capable of SCSI drive hot plug (no reboot required) |
 | discScsiHotUnplug | no | bool | This volume is capable of SCSI drive hot unplug (no reboot required) |
+<<<<<<< HEAD
 | licenceType | no | string | The snapshot's licence type: LINUX, WINDOWS, WINDOWS2016, or UNKNOWN. |
+=======
+| licenceType | no | string | The snapshot's licence type: LINUX, WINDOWS, or UNKNOWN. |
+>>>>>>> 7f8ee4eff9c4e671bcc849b106e6158b21407144
 
 After retrieving a snapshot, you can change its properties and call the `updateSnapshot` method:
 

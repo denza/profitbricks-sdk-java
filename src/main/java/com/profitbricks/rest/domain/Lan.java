@@ -98,6 +98,7 @@ public class Lan extends ProfitbricksBase {
        public void setIpFailover(List<IpFailover> ipFailover) {
            this.ipFailover = ipFailover;
        }
+
    }
 
    @JsonIgnoreProperties(ignoreUnknown = true)

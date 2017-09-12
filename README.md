@@ -1324,7 +1324,7 @@ Creates an IP block.
 
 | Name | Required | Type | Description |
 |---|---|---|---|
-| ipBlock.location | **yes** | string | This must be one of the following locations: us/las, de/fra, de/fkb. |
+| ipBlock.location | **yes** | string | This must be one of the following locations: us/las, us/ewr, de/fra, de/fkb. |
 | ipBlock.size | **yes** | int | The size of the IP block you want. |
 | ipBlock.name | no | string | A descriptive name for the IP block |
 
@@ -1401,7 +1401,7 @@ Performs updates to attributes of a snapshot.
 | discVirtioHotUnplug | no | bool | This volume is capable of Virt-IO drive hot unplug (no reboot required) |
 | discScsiHotPlug | no | bool | This volume is capable of SCSI drive hot plug (no reboot required) |
 | discScsiHotUnplug | no | bool | This volume is capable of SCSI drive hot unplug (no reboot required) |
-| licenceType | no | string | The snapshot's licence type: LINUX, WINDOWS, or UNKNOWN. |
+| licenceType | no | string | The snapshot's licence type: LINUX, WINDOWS, WINDOWS2016, or UNKNOWN. |
 
 After retrieving a snapshot, you can change its properties and call the `updateSnapshot` method:
 
